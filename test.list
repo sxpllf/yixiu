@@ -67,9 +67,12 @@ DOMAIN-SUFFIX,whoisip.me
 DOMAIN-SUFFIX,ipaddress.me
 DOMAIN-SUFFIX,ip2proxy.com
 DOMAIN-SUFFIX,vpnapi.io
+#自定义临时添加
+DOMAIN-SUFFIX,claude.ai
 
 
 IP-CIDR,74.125.250.129/24,no-resolve
 
 DOMAIN-SUFFIX,l.google.com
+
 解释
