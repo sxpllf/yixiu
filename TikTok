@@ -1,0 +1,11 @@
+rules:
+  # ===== TikTok 全量强制走 TKMG =====
+  - DOMAIN-SUFFIX,tiktok.com,TKMG
+  - DOMAIN-SUFFIX,tiktokv.com,TKMG
+  - DOMAIN-SUFFIX,tiktokcdn.com,TKMG
+  - DOMAIN-SUFFIX,byteoversea.com,TKMG
+  - DOMAIN-SUFFIX,ibyteimg.com,TKMG
+  - DOMAIN-SUFFIX,ibytedtos.com,TKMG
+  - DOMAIN-SUFFIX,ipstatp.com,TKMG
+  - DOMAIN-SUFFIX,muscdn.com,TKMG
+  - DOMAIN-SUFFIX,musical.ly,TKMG
