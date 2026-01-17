@@ -1,0 +1,21 @@
+# T-Mobile core domains
+DOMAIN-SUFFIX,t-mobile.com
+DOMAIN-SUFFIX,tmobile.com
+DOMAIN-SUFFIX,tmo.com
+DOMAIN-SUFFIX,mytmoclaim.com
+
+# T-Mobile prepaid / metro (常见相关品牌)
+DOMAIN-SUFFIX,metropcs.com
+DOMAIN-SUFFIX,metrobyt-mobile.com
+
+# 常见登录/自助/账户相关（子域会被 suffix 覆盖，但保留便于阅读）
+DOMAIN,my.t-mobile.com
+DOMAIN,account.t-mobile.com
+DOMAIN,login.t-mobile.com
+DOMAIN,shop.t-mobile.com
+DOMAIN,support.t-mobile.com
+
+# 可能出现的 API/静态资源（依旧可被 suffix 覆盖）
+DOMAIN-SUFFIX,fast.t-mobile.com
+DOMAIN-SUFFIX,static.t-mobile.com
+DOMAIN-SUFFIX,assets.t-mobile.com
