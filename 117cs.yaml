@@ -219,11 +219,18 @@ dev_default: &dev_default
 crypto_default: &crypto_default
   type: select
   proxies:
-    - 落地-108
-    - MGTK
+    - 香港-自动
+    - 新加坡-自动
+    - 日本-自动
     - 美国-自动
+    - 香港-手动
+    - 新加坡-手动
+    - 日本-手动
+    - 美国-手动
     - 所有-自动
     - 所有-手动
+    - MGTK
+    - 落地-108
     - 直连
     - 拒绝
 
@@ -621,4 +628,5 @@ rule-providers:
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   BiliBili / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
+
 
