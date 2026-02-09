@@ -215,22 +215,34 @@ dev_default: &dev_default
     - 直连
     - 拒绝
 
-# 交易所/加密：尽量固定出口，降低频繁换IP风控
+# 交易所/加密：固定出口优先，避免频繁换IP风控
 crypto_default: &crypto_default
   type: select
   proxies:
-    - 香港-自动
-    - 新加坡-自动
-    - 日本-自动
-    - 美国-自动
+    # 1) 最固定：你自己的落地（优先）
+    - 落地-108
+    - MGTK
+
+    # 2) 次固定：手动地区（你自己点一次，就不会乱跳）
+    - 美国-手动
     - 香港-手动
     - 新加坡-手动
     - 日本-手动
-    - 美国-手动
-    - 所有-自动
+    - 台湾-手动
+    - 其他-手动
+
+    # 3) 兜底：故转（先手动后自动，但仍可能切换，放后面）
+    - 美国-故转
+    - 香港-故转
+    - 新加坡-故转
+    - 日本-故转
+    - 台湾-故转
+    - 其他-故转
+
+    # 4) 最后才用：自动组（会变动，交易所不建议优先）
     - 所有-手动
-    - MGTK
-    - 落地-108
+    - 所有-自动
+
     - 直连
     - 拒绝
 
@@ -628,5 +640,6 @@ rule-providers:
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   BiliBili / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
+
 
 
