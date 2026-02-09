@@ -13,7 +13,7 @@ proxy-providers:
       interval: 300
 
   火烧云:
-    url: "https://onehsy.yeniudsss.us/mj/v8/front/mysubnew?token=ab0aad9a3178d539f3fb8f24c73b273&timestamp=1767674336&sign=c274dd611d3f3a4c5ccda1f3fb4f935cb"
+    url: "https://onehsy.yeniudsss.us/mj/v8/front/mysubnew?token=ab0aad9a317a8d539f3fb8f24c73b273&timestamp=1770649772&sign=bf69c07ebd96721aa50567894817ac21"
     type: http
     interval: 86400
     health-check:
@@ -621,3 +621,4 @@ rule-providers:
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   BiliBili / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
+
