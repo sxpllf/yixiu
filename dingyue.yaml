@@ -34,21 +34,25 @@ proxies:
   - {name: 直连, type: direct}
   - {name: 拒绝, type: reject}
 
-  # Reality 节点（MGTK）
   - name: MGTK
     type: vless
-    server: 108.66.217.25
+    server: mgjk.yixiu.edu.kg
     port: 443
     uuid: db53f763-920e-4e42-97c2-52860b2b31be
-    network: tcp
+    network: ws
     udp: false
     tls: true
-    #flow: xtls-rprx-vision
-    servername: aws.amazon.com
+    servername: mgjk.yixiu.edu.kg     # 等同 sni
     client-fingerprint: chrome
-    reality-opts:
-    public-key: zbTSuCtrpTIbR0HPsfKq5PG76ygB8gv_pvgIbdifuEE
-    short-id: "a1b2c3d4"
+    alpn:
+      - h2
+      - http/1.1
+    ws-opts:
+      path: /jm
+      headers:
+        Host: mgjk.yixiu.edu.kg
+
+
 
 
   # 直连落地（不双跳）——AI 默认走它
@@ -215,15 +219,34 @@ dev_default: &dev_default
     - 直连
     - 拒绝
 
-# 交易所/加密：尽量固定出口，降低频繁换IP风控
+# 交易所/加密：固定出口优先，避免频繁换IP风控
 crypto_default: &crypto_default
   type: select
   proxies:
+    # 1) 最固定：你自己的落地（优先）
     - 落地-108
     - MGTK
-    - 美国-自动
-    - 所有-自动
+
+    # 2) 次固定：手动地区（你自己点一次，就不会乱跳）
+    - 美国-手动
+    - 香港-手动
+    - 新加坡-手动
+    - 日本-手动
+    - 台湾-手动
+    - 其他-手动
+
+    # 3) 兜底：故转（先手动后自动，但仍可能切换，放后面）
+    - 美国-故转
+    - 香港-故转
+    - 新加坡-故转
+    - 日本-故转
+    - 台湾-故转
+    - 其他-故转
+
+    # 4) 最后才用：自动组（会变动，交易所不建议优先）
     - 所有-手动
+    - 所有-自动
+
     - 直连
     - 拒绝
 
@@ -621,4 +644,5 @@ rule-providers:
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   BiliBili / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
+
 
