@@ -1,5 +1,6 @@
 # ========================
-# Clash-ALL 优化配置（AI默认落地-108 + 分组默认优选）
+# Clash-ALL 运维终稿
+# 策略组顺序：分流业务组 → 地区故转组 → 基础全量组
 # ========================
 
 proxy-providers:
@@ -7,6 +8,7 @@ proxy-providers:
     url: "https://106.55.228.246:36666/hxvip?token=742befa84dbc6a69200c1bb0583c0f9f"
     type: http
     interval: 86400
+    path: ./providers/hx.yaml
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
@@ -16,6 +18,7 @@ proxy-providers:
     url: "https://onehsy.yeniudsss.us/mj/v8/front/mysubnew?token=ab0aad9a317a8d539f3fb8f24c73b273&timestamp=1770649772&sign=bf69c07ebd96721aa50567894817ac21"
     type: http
     interval: 86400
+    path: ./providers/hsy.yaml
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
@@ -25,48 +28,76 @@ proxy-providers:
     url: "https://dbsub2.whtjdasha.com/s/23c2b1ab4ac006b639e82b9384558daf"
     type: http
     interval: 86400
+    path: ./providers/db.yaml
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
 
+# ========================
+# 本地节点
+# ========================
 proxies:
-  - {name: 直连, type: direct}
-  - {name: 拒绝, type: reject}
+  - name: 直连
+    type: direct
+
+  - name: 拒绝
+    type: reject
 
   - name: MGTK
     type: vless
-    server: mgjk.yixiu.edu.kg
-    port: 443
-    uuid: db53f763-920e-4e42-97c2-52860b2b31be
-    network: ws
-    udp: false
+    server: 65.49.233.36
+    port: 37798
+    uuid: c1103ef6-325c-4579-ab3a-fdb783090342
+    network: tcp
     tls: true
-    servername: mgjk.yixiu.edu.kg     # 等同 sni
+    udp: true
+    servername: www.microsoft.com
+    reality-opts:
+      public-key: 9pd7wQWzqGwICNbBEKo-2txS4bxlcaapBLKSfjnbCFg
+      short-id: a6ba9336f3ff8b15
     client-fingerprint: chrome
-    alpn:
-      - h2
-      - http/1.1
-    ws-opts:
-      path: /jm
-      headers:
-        Host: mgjk.yixiu.edu.kg
 
+  - name: jndvps-yn0w5ct3
+    type: vless
+    server: 65.49.233.36
+    port: 37798
+    uuid: c1103ef6-325c-4579-ab3a-fdb783090342
+    network: tcp
+    tls: true
+    udp: true
+    servername: www.microsoft.com
+    reality-opts:
+      public-key: 9pd7wQWzqGwICNbBEKo-2txS4bxlcaapBLKSfjnbCFg
+      short-id: a6ba9336f3ff8b15
+    client-fingerprint: chrome
 
-
-
-  # 直连落地（不双跳）——AI 默认走它
   - name: 落地-108
     type: vless
     server: 108.66.217.25
-    port: 8443
-    uuid: 040ba575-4817-42f1-906e-ff2fc9f70bfa
-    network: tcp
+    port: 24157
+    uuid: 92eb07c6-f3ce-4e3d-82bb-59262146fcb8
     udp: true
-    tls: false
+    network: tcp
+    tls: true
+    alpn: [h2, http/1.1]
+    client-fingerprint: chrome
+    skip-cert-verify: false
+
+  - name: 美国家宽-bwz0lhxh
+    type: vless
+    server: 108.66.217.25
+    port: 24157
+    uuid: 92eb07c6-f3ce-4e3d-82bb-59262146fcb8
+    udp: true
+    network: tcp
+    tls: true
+    alpn: [h2, http/1.1]
+    client-fingerprint: chrome
+    skip-cert-verify: false
 
 # ========================
-# 主要端口设置
+# 端口设置
 # ========================
 port: 7890
 socks-port: 7891
@@ -81,13 +112,19 @@ log-level: info
 external-controller: 0.0.0.0:9090
 secret: "123456"
 
+ipv6: false
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
 # ========================
 # DNS 设置
 # ========================
 dns:
   enable: true
   listen: 0.0.0.0:7874
-  ipv6: true
+  ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16
   nameserver:
@@ -124,8 +161,6 @@ dns:
     - +.gptacg.top
     - +.wxda.net
 
-ipv6: false
-
 # ========================
 # TUN 模块
 # ========================
@@ -138,390 +173,346 @@ tun:
   auto-redirect: false
   strict-route: false
 
-profile:
-  store-selected: true
-  store-fake-ip: true
-
 # ========================
-# 策略组锚点（分组默认优选）
+# 策略组（按使用频率排序：分流 → 地区 → 基础）
 # ========================
-
-# AI 默认：落地-108 优先（你要求）
-ai_default: &ai_default
-  type: select
-  proxies:
-    - 落地-108
-    - MGTK
-    - 所有-自动
-    - 所有-手动
-    - 直连
-    - 拒绝
-
-# TikTok/强风控：Reality 优先（更稳）
-tiktok_default: &tiktok_default
-  type: select
-  proxies:
-    - MGTK
-    - 落地-108
-    - 美国-自动
-    - 美国-手动
-    - 所有-自动
-    - 所有-手动
-    - 直连
-    - 拒绝
-
-# 社交/通讯：所有-自动优先（避免单点出口导致风控）
-social_default: &social_default
-  type: select
-  proxies:
-    - 所有-自动
-    - 所有-手动
-    - MGTK
-    - 落地-108
-    - 香港-自动
-    - 新加坡-自动
-    - 日本-自动
-    - 美国-自动
-    - 直连
-    - 拒绝
-
-# 流媒体：地区自动优先（解锁靠地理）
-stream_default: &stream_default
-  type: select
-  proxies:
-    - 香港-自动
-    - 新加坡-自动
-    - 日本-自动
-    - 美国-自动
-    - 香港-手动
-    - 新加坡-手动
-    - 日本-手动
-    - 美国-手动
-    - 所有-自动
-    - 所有-手动
-    - MGTK
-    - 落地-108
-    - 直连
-    - 拒绝
-
-# 开发/工具：固定出口更友好（GitHub/运维/后台）
-dev_default: &dev_default
-  type: select
-  proxies:
-    - 落地-108
-    - 所有-自动
-    - 所有-手动
-    - MGTK
-    - 香港-自动
-    - 新加坡-自动
-    - 日本-自动
-    - 美国-自动
-    - 直连
-    - 拒绝
-
-# 交易所/加密：固定出口优先，避免频繁换IP风控
-crypto_default: &crypto_default
-  type: select
-  proxies:
-    # 1) 最固定：你自己的落地（优先）
-    - 落地-108
-    - MGTK
-
-    # 2) 次固定：手动地区（你自己点一次，就不会乱跳）
-    - 美国-手动
-    - 香港-手动
-    - 新加坡-手动
-    - 日本-手动
-    - 台湾-手动
-    - 其他-手动
-
-    # 3) 兜底：故转（先手动后自动，但仍可能切换，放后面）
-    - 美国-故转
-    - 香港-故转
-    - 新加坡-故转
-    - 日本-故转
-    - 台湾-故转
-    - 其他-故转
-
-    # 4) 最后才用：自动组（会变动，交易所不建议优先）
-    - 所有-手动
-    - 所有-自动
-
-    - 直连
-    - 拒绝
-
-# 国外默认：机场自动优先（你日常更稳，避免所有东西都压108）
-foreign_default: &foreign_default
-  type: select
-  proxies:
-    - 所有-自动
-    - 所有-手动
-    - 落地-108
-    - MGTK
-    - 香港-故转
-    - 台湾-故转
-    - 日本-故转
-    - 新加坡-故转
-    - 韩国-故转
-    - 美国-故转
-    - 英国-故转
-    - 其他-故转
-    - 直连
-    - 拒绝
-
-# 国内默认：直连优先
-domestic_default: &domestic_default
-  type: select
-  proxies:
-    - 直连
-    - 所有-自动
-    - 所有-手动
-    - 落地-108
-    - MGTK
-    - 拒绝
-
 proxy-groups:
 
-  # 业务分流组
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📱 业务分流组（日常使用，置顶）
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  - name: ChatGPT
+    type: select
+    proxies: [落地-108, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+
+  - name: Claude
+    type: select
+    proxies: [落地-108, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+
+  - name: Gemini
+    type: select
+    proxies: [落地-108, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+
+  - name: Copilot
+    type: select
+    proxies: [落地-108, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+
+  - name: Perplexity
+    type: select
+    proxies: [落地-108, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+
+  - name: Meta AI
+    type: select
+    proxies: [落地-108, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+
+  - name: Grok
+    type: select
+    proxies: [落地-108, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+
+  - name: Groq
+    type: select
+    proxies: [落地-108, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+
+  - name: GitHub
+    type: select
+    proxies: [落地-108, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+
   - name: TikTok-专用
-    <<: *tiktok_default
+    type: select
+    proxies: [MGTK, 美国-故转, 日本-故转, 新加坡-故转, 韩国-故转, 香港-故转, 台湾-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: T-mobile
-    <<: *tiktok_default
-
-  # ===== AI 程序：默认落地-108 =====
-  - {name: ChatGPT, <<: *ai_default}
-  - {name: Gemini, <<: *ai_default}
-  - {name: Copilot, <<: *ai_default}
-  - {name: Perplexity, <<: *ai_default}
-  - {name: Claude, <<: *ai_default}
-  - {name: Meta AI, <<: *ai_default}
-  - {name: Grok, <<: *ai_default}
-  - {name: Groq, <<: *ai_default}
-
-  # ===== 开发/工具（固定出口优先）=====
-  - {name: GitHub, <<: *dev_default}
-
-  # ===== 社交/通讯（避免单点出口）=====
-  - {name: Telegram, <<: *social_default}
-  - {name: WhatsApp, <<: *social_default}
-  - {name: Facebook, <<: *social_default}
-  - {name: Reddit, <<: *social_default}
-
-  # ===== 流媒体（地区优先）=====
-  - {name: YouTube, <<: *stream_default}
-  - {name: Netflix, <<: *stream_default}
-  - {name: HBO, <<: *stream_default}
-  - {name: Disney, <<: *stream_default}
-  - {name: Crunchyroll, <<: *stream_default}
-  - {name: Spotify, <<: *stream_default}
-  - {name: Popcorn, <<: *stream_default}
-
-  # ===== 交易所（尽量固定IP）=====
-  - {name: Crypto, <<: *crypto_default}
-
-  # ===== 三大厂账号体系（更稳妥：不强制固定出口）=====
-  - {name: Apple, <<: *social_default}
-  - {name: Google, <<: *social_default}
-  - {name: Microsoft, <<: *social_default}
-
-  # ===== 其他保持国外默认 =====
-  - {name: Amazon, <<: *foreign_default}
-  - {name: Nvidia, <<: *foreign_default}
-  - {name: Steam, <<: *foreign_default}
-  - {name: Games, <<: *foreign_default}
-  - {name: Test, <<: *foreign_default}
-  - {name: Block, <<: *foreign_default}
-  - {name: 国外, <<: *foreign_default}
-  - {name: 其他, <<: *foreign_default}
-
-  # 国内类
-  - {name: BiliBili, <<: *domestic_default}
-  - {name: 国内, <<: *domestic_default}
-
-  # 全部节点集合
-  - name: 所有-手动
     type: select
-    include-all: true
-    filter: "^((?!(直连|拒绝)).)*$"
+    proxies: [MGTK, 美国-故转, 日本-故转, 新加坡-故转, 韩国-故转, 香港-故转, 台湾-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
-  - name: 所有-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "^((?!(直连|拒绝)).)*$"
+  - name: Telegram
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 直连, 拒绝]
 
-  # 香港组
+  - name: WhatsApp
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 直连, 拒绝]
+
+  - name: Facebook
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 直连, 拒绝]
+
+  - name: Reddit
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 直连, 拒绝]
+
+  - name: YouTube
+    type: select
+    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+
+  - name: Netflix
+    type: select
+    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+
+  - name: Disney
+    type: select
+    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+
+  - name: HBO
+    type: select
+    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+
+  - name: Spotify
+    type: select
+    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+
+  - name: Crunchyroll
+    type: select
+    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+
+  - name: Popcorn
+    type: select
+    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+
+  - name: Crypto
+    type: select
+    proxies: [落地-108, MGTK, 美国-故转, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 所有-手动, 所有-自动, 直连, 拒绝]
+
+  - name: Apple
+    type: select
+    proxies: [直连, 所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 拒绝]
+
+  - name: Google
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 直连, 拒绝]
+
+  - name: Microsoft
+    type: select
+    proxies: [直连, 所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 拒绝]
+
+  - name: Amazon
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+
+  - name: Nvidia
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+
+  - name: Steam
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+
+  - name: Games
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+
+  - name: BiliBili
+    type: select
+    proxies: [直连, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 拒绝]
+
+  - name: 国外
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+
+  - name: 国内
+    type: select
+    proxies: [直连, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 拒绝]
+
+  - name: 其他
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+
+  - name: Test
+    type: select
+    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+
+  - name: Block
+    type: select
+    proxies: [拒绝, 直连, 所有-自动, 所有-手动]
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🌏 地区故障转移组（中间层）
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
   - name: 香港-故转
     type: fallback
+    proxies: [香港-手动, 香港-自动]
+    url: http://www.gstatic.com/generate_204
     interval: 300
     lazy: false
-    proxies:
-      - 香港-手动
-      - 香港-自动
+
+  - name: 台湾-故转
+    type: fallback
+    proxies: [台湾-手动, 台湾-自动]
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    lazy: false
+
+  - name: 日本-故转
+    type: fallback
+    proxies: [日本-手动, 日本-自动]
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    lazy: false
+
+  - name: 韩国-故转
+    type: fallback
+    proxies: [韩国-手动, 韩国-自动]
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    lazy: false
+
+  - name: 新加坡-故转
+    type: fallback
+    proxies: [新加坡-手动, 新加坡-自动]
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    lazy: false
+
+  - name: 美国-故转
+    type: fallback
+    proxies: [美国-手动, 美国-自动]
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    lazy: false
+
+  - name: 英国-故转
+    type: fallback
+    proxies: [英国-手动, 英国-自动]
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    lazy: false
+
+  - name: 其他-故转
+    type: fallback
+    proxies: [其他-手动, 其他-自动]
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    lazy: false
+
+  - name: 故障转移
+    type: fallback
+    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 所有-自动]
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    lazy: false
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🔧 地区手动/自动选择组（底层）
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   - name: 香港-手动
     type: select
-    include-all: true
-    filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广港|香港|HK|Hong\\s*Kong|HongKong|🇭🇰)"
 
   - name: 香港-自动
     type: url-test
-    include-all: true
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广港|香港|HK|Hong\\s*Kong|HongKong|🇭🇰)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
     tolerance: 50
-    interval: 300
-    filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"
-
-  # 台湾组
-  - name: 台湾-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 台湾-手动
-      - 台湾-自动
 
   - name: 台湾-手动
     type: select
-    include-all: true
-    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广台|台湾|台灣|TW|Tai\\s*wan|TaiWan|🇹🇼)"
 
   - name: 台湾-自动
     type: url-test
-    include-all: true
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广台|台湾|台灣|TW|Tai\\s*wan|TaiWan|🇹🇼)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
     tolerance: 50
-    interval: 300
-    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
-
-  # 日本组
-  - name: 日本-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 日本-手动
-      - 日本-自动
 
   - name: 日本-手动
     type: select
-    include-all: true
-    filter: "(?=.*(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广日|日本|JP|Tokyo|Osaka|东京|大阪|埼玉|🇯🇵|Japan)"
 
   - name: 日本-自动
     type: url-test
-    include-all: true
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广日|日本|JP|Tokyo|Osaka|东京|大阪|埼玉|🇯🇵|Japan)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
     tolerance: 50
-    interval: 300
-    filter: "(?=.*(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
-
-  # 新加坡组
-  - name: 新加坡-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 新加坡-手动
-      - 新加坡-自动
-
-  - name: 新加坡-手动
-    type: select
-    include-all: true
-    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
-
-  - name: 新加坡-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
-
-  # 韩国组
-  - name: 韩国-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 韩国-手动
-      - 韩国-自动
 
   - name: 韩国-手动
     type: select
-    include-all: true
-    filter: "(?=.*(广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea)).*$"
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广韩|韩国|韓國|KR|Seoul|首尔|🇰🇷|Korea)"
 
   - name: 韩国-自动
     type: url-test
-    include-all: true
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广韩|韩国|韓國|KR|Seoul|首尔|🇰🇷|Korea)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
     tolerance: 50
-    interval: 300
-    filter: "(?=.*(广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea)).*$"
 
-  # 美国组
-  - name: 美国-故转
-    type: fallback
+  - name: 新加坡-手动
+    type: select
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广新|新加坡|SG|Singapore|狮城|坡|🇸🇬)"
+
+  - name: 新加坡-自动
+    type: url-test
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广新|新加坡|SG|Singapore|狮城|坡|🇸🇬)"
+    url: http://www.gstatic.com/generate_204
     interval: 300
-    lazy: false
-    proxies:
-      - 美国-手动
-      - 美国-自动
+    tolerance: 50
 
   - name: 美国-手动
     type: select
-    include-all: true
-    filter: "(?=.*(广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).*$"
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广美|美国|US|United\\s*States|Los\\s*Angeles|San\\s*Jose|Dallas|New\\s*York|洛杉|圣何塞|达拉斯|纽约|🇺🇸)"
 
   - name: 美国-自动
     type: url-test
-    include-all: true
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(广美|美国|US|United\\s*States|Los\\s*Angeles|San\\s*Jose|Dallas|New\\s*York|洛杉|圣何塞|达拉斯|纽约|🇺🇸)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
     tolerance: 50
-    interval: 300
-    filter: "(?=.*(广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).*$"
-
-  # 英国组
-  - name: 英国-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 英国-手动
-      - 英国-自动
 
   - name: 英国-手动
     type: select
-    include-all: true
-    filter: "(?=.*(英国|英|伦敦|UK|United Kingdom|🇬🇧|London)).*$"
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(英国|UK|United\\s*Kingdom|London|伦敦|🇬🇧)"
 
   - name: 英国-自动
     type: url-test
-    include-all: true
+    use: [红杏云, 火烧云, 多宝]
+    filter: "(?i)(英国|UK|United\\s*Kingdom|London|伦敦|🇬🇧)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
     tolerance: 50
-    interval: 300
-    filter: "(?=.*(英国|英|伦敦|UK|United Kingdom|🇬🇧|London)).*$"
-
-  # 其他组
-  - name: 其他-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 其他-手动
-      - 其他-自动
 
   - name: 其他-手动
     type: select
-    include-all: true
-    filter: "^((?!(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States|英国|UK|United Kingdom|伦敦|英|London|🇬🇧)).)*$"
+    proxies: [所有-手动]
 
   - name: 其他-自动
+    type: select
+    proxies: [所有-自动]
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📦 全量节点组（最底层）
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  - name: 所有-手动
+    type: select
+    use: [红杏云, 火烧云, 多宝]
+
+  - name: 所有-自动
     type: url-test
-    include-all: true
-    tolerance: 50
+    use: [红杏云, 火烧云, 多宝]
+    url: http://www.gstatic.com/generate_204
     interval: 300
-    filter: "^((?!(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States|英国|UK|United Kingdom|伦敦|英|London|🇬🇧)).)*$"
+    tolerance: 50
 
 # ========================
-# 规则引擎（rules）
+# 规则引擎
 # ========================
 rules:
   - RULE-SET,TMobile_Domain,T-mobile
@@ -644,5 +635,3 @@ rule-providers:
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   BiliBili / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
-
-
