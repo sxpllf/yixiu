@@ -1,361 +1,260 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎵 TikTok 主站 & 核心域名
+# 🛒 Amazon 主站 & 各国站点
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktok.com
-DOMAIN-SUFFIX,tiktokv.com
-DOMAIN-SUFFIX,tiktokv.eu
-DOMAIN-SUFFIX,tiktokv.us
-DOMAIN-SUFFIX,tiktokw.eu
-DOMAIN-SUFFIX,tiktokw.us
-DOMAIN-SUFFIX,tiktokd.net
-DOMAIN-SUFFIX,tiktokd.org
-DOMAIN-SUFFIX,tik-tokapi.com
-DOMAIN-SUFFIX,musical.ly
-DOMAIN-SUFFIX,musically.com
+DOMAIN-SUFFIX,amazon.com
+DOMAIN-SUFFIX,amazon.co.uk
+DOMAIN-SUFFIX,amazon.co.jp
+DOMAIN-SUFFIX,amazon.de
+DOMAIN-SUFFIX,amazon.fr
+DOMAIN-SUFFIX,amazon.it
+DOMAIN-SUFFIX,amazon.es
+DOMAIN-SUFFIX,amazon.ca
+DOMAIN-SUFFIX,amazon.com.au
+DOMAIN-SUFFIX,amazon.com.br
+DOMAIN-SUFFIX,amazon.com.mx
+DOMAIN-SUFFIX,amazon.in
+DOMAIN-SUFFIX,amazon.nl
+DOMAIN-SUFFIX,amazon.sg
+DOMAIN-SUFFIX,amazon.ae
+DOMAIN-SUFFIX,amazon.sa
+DOMAIN-SUFFIX,amazon.se
+DOMAIN-SUFFIX,amazon.pl
+DOMAIN-SUFFIX,amazon.eg
+DOMAIN-SUFFIX,amazon.com.tr
+DOMAIN-SUFFIX,amazon.com.be
+DOMAIN-SUFFIX,amazon.cn
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📦 CDN & 静态资源
+# 🏪 Amazon 卖家中心 Seller Central（重要！）
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktokcdn.com
-DOMAIN-SUFFIX,tiktokcdn-eu.com
-DOMAIN-SUFFIX,tiktokcdn-us.com
-DOMAIN-SUFFIX,tiktokeu-cdn.com
-DOMAIN-SUFFIX,tiktokrow-cdn.com
-DOMAIN-SUFFIX,tiktok-row.net
-DOMAIN-SUFFIX,muscdn.com
-DOMAIN-SUFFIX,ttlivecdn.com
-DOMAIN-SUFFIX,ttwstatic.com
-DOMAIN-SUFFIX,ttcdn.com
-DOMAIN-SUFFIX,ttimg.com
+DOMAIN-SUFFIX,sellercentral.amazon.com
+DOMAIN-SUFFIX,sellercentral.amazon.co.uk
+DOMAIN-SUFFIX,sellercentral.amazon.co.jp
+DOMAIN-SUFFIX,sellercentral.amazon.de
+DOMAIN-SUFFIX,sellercentral.amazon.fr
+DOMAIN-SUFFIX,sellercentral.amazon.it
+DOMAIN-SUFFIX,sellercentral.amazon.es
+DOMAIN-SUFFIX,sellercentral.amazon.ca
+DOMAIN-SUFFIX,sellercentral.amazon.com.au
+DOMAIN-SUFFIX,sellercentral.amazon.com.br
+DOMAIN-SUFFIX,sellercentral.amazon.com.mx
+DOMAIN-SUFFIX,sellercentral.amazon.in
+DOMAIN-SUFFIX,sellercentral.amazon.nl
+DOMAIN-SUFFIX,sellercentral.amazon.sg
+DOMAIN-SUFFIX,sellercentral.amazon.ae
+DOMAIN-SUFFIX,sellercentral.amazon.sa
+DOMAIN-SUFFIX,sellercentral.amazon.se
+DOMAIN-SUFFIX,sellercentral.amazon.pl
+DOMAIN-SUFFIX,sellercentral-europe.amazon.com
+DOMAIN-SUFFIX,sellercentral-japan.amazon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🌐 Akamai / EdgeSuite / Fastly CDN
+# 📦 Amazon 物流 FBA & 仓储
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktokcdn-us.com.edgesuite.net
-DOMAIN-SUFFIX,tiktokcdn.com.akamaized.net
-DOMAIN-SUFFIX,tiktokcdn.com.edgesuite.net
-DOMAIN-SUFFIX,tiktokv.com.edgekey.net
-DOMAIN-SUFFIX,tiktokv.com.edgesuite.net
-DOMAIN,p16-tiktokcdn-com.akamaized.net
-DOMAIN-SUFFIX,bytedance.map.fastly.net
-DOMAIN-SUFFIX,tiktok.map.fastly.net
+DOMAIN-SUFFIX,amazonlogistics.com
+DOMAIN-SUFFIX,amazonlogistics.eu
+DOMAIN-SUFFIX,logistics.amazon.com
+DOMAIN-SUFFIX,logistics.amazon.co.uk
+DOMAIN-SUFFIX,logistics.amazon.de
+DOMAIN-SUFFIX,logistics.amazon.co.jp
+DOMAIN-SUFFIX,fba.amazon.com
+DOMAIN-SUFFIX,shipment.amazon.com
+DOMAIN-SUFFIX,ship.amazon.com
+DOMAIN-SUFFIX,track.amazon.com
+DOMAIN-SUFFIX,amazonshipping.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🏢 字节跳动海外基础设施
+# 💰 Amazon 广告 Advertising（重要！）
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,byteoversea.com
-DOMAIN-SUFFIX,bytedapm.com
-DOMAIN-SUFFIX,byteintlapi.com
-DOMAIN-SUFFIX,bytedance.com
-DOMAIN-SUFFIX,bytedance.net
-DOMAIN-SUFFIX,byteimg.com
-DOMAIN-SUFFIX,bytegecko.com
-DOMAIN-SUFFIX,bytegecko-i18n.com
-DOMAIN-SUFFIX,ibytedtos.com
-DOMAIN-SUFFIX,ibyteimg.com
-DOMAIN-SUFFIX,ipstatp.com
-DOMAIN-SUFFIX,sgpstatp.com
-DOMAIN-SUFFIX,sgsnssdk.com
-DOMAIN-SUFFIX,ttoverseaus.net
-DOMAIN-SUFFIX,pstatp.com
-DOMAIN-SUFFIX,bytetcc.com
-DOMAIN-SUFFIX,bytednsdoc.com
-DOMAIN-SUFFIX,byteacctimg.com
-DOMAIN-SUFFIX,byteeffecttos.com
-DOMAIN-SUFFIX,effectivecdn.com
+DOMAIN-SUFFIX,advertising.amazon.com
+DOMAIN-SUFFIX,advertising.amazon.co.uk
+DOMAIN-SUFFIX,advertising.amazon.co.jp
+DOMAIN-SUFFIX,advertising.amazon.de
+DOMAIN-SUFFIX,amazonadvertising.com
+DOMAIN-SUFFIX,ads.amazon.com
+DOMAIN-SUFFIX,adsapi.amazon.com
+DOMAIN-SUFFIX,amazon-adsystem.com
+DOMAIN-SUFFIX,aax.amazon.com
+DOMAIN-SUFFIX,aax-eu.amazon.com
+DOMAIN-SUFFIX,aax-fe.amazon.com
+DOMAIN-SUFFIX,aan.amazon.com
+DOMAIN-SUFFIX,assoc-amazon.com
+DOMAIN-SUFFIX,associates.amazon.com
+DOMAIN-SUFFIX,affiliate-program.amazon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🛒 TikTok Shop 电商（重要！）
+# 📊 Amazon 品牌分析 & 数据
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktokglobalshop.com
-DOMAIN-SUFFIX,tiktokglobalshopv.com
-DOMAIN-SUFFIX,tiktokshop.com
-DOMAIN-SUFFIX,tiktok-shops.com
-DOMAIN-SUFFIX,seller.tiktok.com
-DOMAIN-SUFFIX,seller-us.tiktok.com
-DOMAIN-SUFFIX,seller-uk.tiktok.com
-DOMAIN-SUFFIX,seller-id.tiktok.com
-DOMAIN-SUFFIX,seller-my.tiktok.com
-DOMAIN-SUFFIX,seller-th.tiktok.com
-DOMAIN-SUFFIX,seller-vn.tiktok.com
-DOMAIN-SUFFIX,seller-ph.tiktok.com
-DOMAIN-SUFFIX,seller-sg.tiktok.com
-DOMAIN-SUFFIX,seller-br.tiktok.com
-DOMAIN-SUFFIX,affiliate.tiktok.com
-DOMAIN-SUFFIX,affiliate-us.tiktok.com
-DOMAIN-SUFFIX,tiktokshop-seller.com
-DOMAIN-SUFFIX,tiktok-fulfillment.com
-DOMAIN-SUFFIX,tiktokshoplogistics.com
-DOMAIN-SUFFIX,tiktok-shop-logistics.com
+DOMAIN-SUFFIX,brandanalytics.amazon.com
+DOMAIN-SUFFIX,brandservices.amazon.com
+DOMAIN-SUFFIX,brand-registry.amazon.com
+DOMAIN-SUFFIX,brandregistry.amazon.com
+DOMAIN-SUFFIX,amazonbrandservices.com
+DOMAIN-SUFFIX,amazonbrandregistry.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 💰 TikTok Ads 广告投放平台（重要！）
+# 💳 Amazon 支付 & 结算
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktokads.com
-DOMAIN-SUFFIX,tiktok-ads.com
-DOMAIN-SUFFIX,ads-tiktok.com
-DOMAIN-SUFFIX,ads.tiktok.com
-DOMAIN-SUFFIX,business.tiktok.com
-DOMAIN-SUFFIX,tiktokbusiness.com
-DOMAIN-SUFFIX,tiktokbusinessapi.com
-DOMAIN-SUFFIX,business-api.tiktok.com
-DOMAIN-SUFFIX,ads-api.tiktok.com
-DOMAIN-SUFFIX,analytics.tiktok.com
-DOMAIN-SUFFIX,business-analytics.tiktok.com
-DOMAIN-SUFFIX,ad.tiktok.com
-DOMAIN-SUFFIX,adsmanager.tiktok.com
-DOMAIN-SUFFIX,getstarted.tiktok.com
-DOMAIN-SUFFIX,tiktokadsmanager.com
-DOMAIN-SUFFIX,tiktokcreativecenter.com
-DOMAIN-SUFFIX,tiktok-marketing-api.com
+DOMAIN-SUFFIX,payments.amazon.com
+DOMAIN-SUFFIX,pay.amazon.com
+DOMAIN-SUFFIX,amazonpay.com
+DOMAIN-SUFFIX,amazon-pay.com
+DOMAIN-SUFFIX,amazonpayments.com
+DOMAIN-SUFFIX,amazonservices.com
+DOMAIN-SUFFIX,mws.amazon.com
+DOMAIN-SUFFIX,mws.amazonservices.com
+DOMAIN-SUFFIX,mws-eu.amazonservices.com
+DOMAIN-SUFFIX,mws-fe.amazonservices.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎨 TikTok 创作者工具 & Creator Center
+# 🔐 Amazon 登录 & 认证
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,creator.tiktok.com
-DOMAIN-SUFFIX,creator-us.tiktok.com
-DOMAIN-SUFFIX,creatormarketplace.tiktok.com
-DOMAIN-SUFFIX,tiktok-creator.com
-DOMAIN-SUFFIX,tiktokcreators.com
-DOMAIN-SUFFIX,tiktok-creator-marketplace.com
-DOMAIN-SUFFIX,creativecenter.tiktok.com
-DOMAIN-SUFFIX,creative-center.tiktok.com
-DOMAIN-SUFFIX,effect.tiktok.com
-DOMAIN-SUFFIX,effecthouse.tiktok.com
-DOMAIN-SUFFIX,tiktok-effect.com
+DOMAIN-SUFFIX,amazon.com/ap
+DOMAIN-SUFFIX,signin.amazon.com
+DOMAIN-SUFFIX,signin.aws.amazon.com
+DOMAIN-SUFFIX,apac.account.amazon.com
+DOMAIN-SUFFIX,eu.account.amazon.com
+DOMAIN-SUFFIX,na.account.amazon.com
+DOMAIN-SUFFIX,fls-na.amazon.com
+DOMAIN-SUFFIX,fls-eu.amazon.com
+DOMAIN-SUFFIX,fls-fe.amazon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📊 数据分析 & 像素追踪
+# 📦 Amazon CDN & 静态资源
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,analytics-sg.tiktok.com
-DOMAIN-SUFFIX,analytics-va.tiktok.com
-DOMAIN-SUFFIX,pixel.tiktok.com
-DOMAIN-SUFFIX,events.tiktok.com
-DOMAIN-SUFFIX,events-api.tiktok.com
-DOMAIN-SUFFIX,mcs-va.tiktok.com
-DOMAIN-SUFFIX,mcs-sg.tiktok.com
-DOMAIN-SUFFIX,mon.tiktok.com
-DOMAIN-SUFFIX,mon-va.tiktokv.com
-DOMAIN-SUFFIX,log.tiktok.com
-DOMAIN-SUFFIX,log-va.tiktokv.com
-DOMAIN-SUFFIX,abtest-va.tiktokv.com
-DOMAIN-SUFFIX,abtest-sg.tiktokv.com
+DOMAIN-SUFFIX,images-amazon.com
+DOMAIN-SUFFIX,images-na.ssl-images-amazon.com
+DOMAIN-SUFFIX,images-eu.ssl-images-amazon.com
+DOMAIN-SUFFIX,images-fe.ssl-images-amazon.com
+DOMAIN-SUFFIX,ssl-images-amazon.com
+DOMAIN-SUFFIX,media-amazon.com
+DOMAIN-SUFFIX,m.media-amazon.com
+DOMAIN-SUFFIX,g-ecx.images-amazon.com
+DOMAIN-SUFFIX,ecx.images-amazon.com
+DOMAIN-SUFFIX,fls-na.amazon.com
+DOMAIN-SUFFIX,completion.amazon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 💳 支付 & 钱包
+# ☁️ AWS 云服务（运营相关）
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktokpay.com
-DOMAIN-SUFFIX,tiktok-pay.com
-DOMAIN-SUFFIX,pay.tiktok.com
-DOMAIN-SUFFIX,wallet.tiktok.com
-DOMAIN-SUFFIX,coins.tiktok.com
-DOMAIN-SUFFIX,payment.tiktok.com
-DOMAIN-SUFFIX,checkout.tiktok.com
-DOMAIN-SUFFIX,tiktok-checkout.com
+DOMAIN-SUFFIX,amazonaws.com
+DOMAIN-SUFFIX,aws.amazon.com
+DOMAIN-SUFFIX,awsstatic.com
+DOMAIN-SUFFIX,amazonwebservices.com
+DOMAIN-SUFFIX,cloudfront.net
+DOMAIN-SUFFIX,elasticbeanstalk.com
+DOMAIN-SUFFIX,s3.amazonaws.com
+DOMAIN-SUFFIX,s3-us-west-2.amazonaws.com
+DOMAIN-SUFFIX,s3-eu-west-1.amazonaws.com
+DOMAIN-SUFFIX,s3-ap-northeast-1.amazonaws.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎬 直播 & 视频流
+# 🎬 Amazon Prime Video
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,ttlcntcdn.com
-DOMAIN-SUFFIX,ttlcntcdn.net
-DOMAIN-SUFFIX,tiktok-live.com
-DOMAIN-SUFFIX,live.tiktok.com
-DOMAIN-SUFFIX,webcast.tiktok.com
-DOMAIN-SUFFIX,webcast-va.tiktok.com
-DOMAIN-SUFFIX,webcast-sg.tiktok.com
-DOMAIN-SUFFIX,lf16-tiktok-common.ibytedtos.com
-DOMAIN-SUFFIX,lf16-tiktok-web.ibytedtos.com
-DOMAIN-SUFFIX,p16-tiktok-sg.ibytedtos.com
-DOMAIN-SUFFIX,p16-tiktok-va.ibytedtos.com
-DOMAIN-SUFFIX,p16-tiktok-sign-va.ibytedtos.com
-DOMAIN-SUFFIX,p16-webcast.tiktok.com
-DOMAIN-SUFFIX,p19-webcast.tiktok.com
-DOMAIN-SUFFIX,p77-webcast.tiktok.com
-DOMAIN-SUFFIX,pull-flv-l1-mus.pstatp.com
-DOMAIN-SUFFIX,pull-hls-l1-mus.pstatp.com
-DOMAIN-SUFFIX,pull-rtmp-l1-mus.pstatp.com
+DOMAIN-SUFFIX,primevideo.com
+DOMAIN-SUFFIX,amazonvideo.com
+DOMAIN-SUFFIX,aiv-cdn.net
+DOMAIN-SUFFIX,aiv-delivery.net
+DOMAIN-SUFFIX,pv-cdn.net
+DOMAIN-SUFFIX,video.amazon.com
+DOMAIN-SUFFIX,atv-ps.amazon.com
+DOMAIN-SUFFIX,atv-ext.amazon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎮 TikTok Minis 小程序
+# 🎵 Amazon Music
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktok-minis.com
-DOMAIN-SUFFIX,tiktokminis.us
-DOMAIN-SUFFIX,minis.tiktok.com
+DOMAIN-SUFFIX,music.amazon.com
+DOMAIN-SUFFIX,amazonmusic.com
+DOMAIN-SUFFIX,amazon-music.com
+DOMAIN-SUFFIX,ama-zon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🔐 登录 & 认证 & 安全
+# 📚 Amazon Kindle & 数字内容
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktoklogin.com
-DOMAIN-SUFFIX,tiktokregistration.com
-DOMAIN-SUFFIX,login.tiktok.com
-DOMAIN-SUFFIX,accounts.tiktok.com
-DOMAIN-SUFFIX,sso.tiktok.com
-DOMAIN-SUFFIX,auth.tiktok.com
-DOMAIN-SUFFIX,security.tiktok.com
-DOMAIN-SUFFIX,verify.tiktok.com
-DOMAIN-SUFFIX,captcha.tiktok.com
+DOMAIN-SUFFIX,kindle.com
+DOMAIN-SUFFIX,kindle.amazon.com
+DOMAIN-SUFFIX,kindlefc.com
+DOMAIN-SUFFIX,read.amazon.com
+DOMAIN-SUFFIX,audible.com
+DOMAIN-SUFFIX,audible.co.uk
+DOMAIN-SUFFIX,audible.de
+DOMAIN-SUFFIX,audible.fr
+DOMAIN-SUFFIX,audible.co.jp
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🌍 地区特定域名
+# 🏠 Amazon 智能设备
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktok.co.id
-DOMAIN-SUFFIX,tiktok.co.jp
-DOMAIN-SUFFIX,tiktok.co.kr
-DOMAIN-SUFFIX,tiktok.co.uk
-DOMAIN-SUFFIX,tiktok.com.au
-DOMAIN-SUFFIX,tiktok.com.br
-DOMAIN-SUFFIX,tiktok.com.sg
-DOMAIN-SUFFIX,tiktok.com.mx
-DOMAIN-SUFFIX,tiktok.com.my
-DOMAIN-SUFFIX,tiktok.de
-DOMAIN-SUFFIX,tiktok.es
-DOMAIN-SUFFIX,tiktok.fr
-DOMAIN-SUFFIX,tiktok.it
-DOMAIN-SUFFIX,tiktok.nl
-DOMAIN-SUFFIX,tiktok.ph
-DOMAIN-SUFFIX,tiktok.pl
-DOMAIN-SUFFIX,tiktok.ru
-DOMAIN-SUFFIX,tiktok.th
-DOMAIN-SUFFIX,tiktok.tw
-DOMAIN-SUFFIX,tiktok.vn
-DOMAIN-SUFFIX,tiktok.sa
-DOMAIN-SUFFIX,tiktok.ae
-DOMAIN-SUFFIX,tiktok.eg
-DOMAIN-SUFFIX,tiktok.pk
-DOMAIN-SUFFIX,tiktok.ng
-DOMAIN-SUFFIX,tiktok.za
-DOMAIN-SUFFIX,tiktok.tr
-DOMAIN-SUFFIX,tiktok.in
+DOMAIN-SUFFIX,alexa.amazon.com
+DOMAIN-SUFFIX,alexa.com
+DOMAIN-SUFFIX,amazonalexa.com
+DOMAIN-SUFFIX,echo.amazon.com
+DOMAIN-SUFFIX,amazonecho.com
+DOMAIN-SUFFIX,ring.com
+DOMAIN-SUFFIX,ring.amazon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🔧 API & 开发者
+# 🎮 Amazon Games & Twitch
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktokapis.com
-DOMAIN-SUFFIX,tiktok-api.com
-DOMAIN-SUFFIX,api.tiktok.com
-DOMAIN-SUFFIX,api-va.tiktok.com
-DOMAIN-SUFFIX,api-sg.tiktok.com
-DOMAIN-SUFFIX,open.tiktok.com
-DOMAIN-SUFFIX,open-api.tiktok.com
-DOMAIN-SUFFIX,developers.tiktok.com
-DOMAIN-SUFFIX,api16-normal-useast1a.tiktokv.com
-DOMAIN-SUFFIX,api16-normal-useast2a.tiktokv.com
-DOMAIN-SUFFIX,api16-core-va.tiktokv.com
-DOMAIN-SUFFIX,api16-va.tiktokv.com
-DOMAIN-SUFFIX,api19-va.tiktokv.com
-DOMAIN-SUFFIX,api77-va.tiktokv.com
-DOMAIN-SUFFIX,api16-core-sg.tiktokv.com
-DOMAIN-SUFFIX,api16-sg.tiktokv.com
-DOMAIN-SUFFIX,api19-sg.tiktokv.com
+DOMAIN-SUFFIX,amazongames.com
+DOMAIN-SUFFIX,gaming.amazon.com
+DOMAIN-SUFFIX,twitch.tv
+DOMAIN-SUFFIX,twitchcdn.net
+DOMAIN-SUFFIX,twitchsvc.net
+DOMAIN-SUFFIX,jtvnw.net
+DOMAIN-SUFFIX,ext-twitch.tv
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📤 上传 & 存储
+# 🛠️ Amazon 开发者 & API
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,upload.tiktok.com
-DOMAIN-SUFFIX,upload-va.tiktokv.com
-DOMAIN-SUFFIX,upload-sg.tiktokv.com
-DOMAIN-SUFFIX,tos-useast2a.bytegecko.com
-DOMAIN-SUFFIX,tos-alisg.bytegecko.com
-DOMAIN-SUFFIX,sf16-sg.tiktokcdn.com
-DOMAIN-SUFFIX,sf16-va.tiktokcdn.com
-DOMAIN-SUFFIX,v16-webapp.tiktok.com
-DOMAIN-SUFFIX,v19-webapp.tiktok.com
-DOMAIN-SUFFIX,v77-webapp.tiktok.com
+DOMAIN-SUFFIX,developer.amazon.com
+DOMAIN-SUFFIX,developer.amazonservices.com
+DOMAIN-SUFFIX,api.amazon.com
+DOMAIN-SUFFIX,api.amazonalexa.com
+DOMAIN-SUFFIX,sp-api.amazon.com
+DOMAIN-SUFFIX,sp-api-na.amazon.com
+DOMAIN-SUFFIX,sp-api-eu.amazon.com
+DOMAIN-SUFFIX,sp-api-fe.amazon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📱 AppsFlyer & 第三方归因
+# 📧 Amazon 通知 & 消息
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN,roovza-launches.appsflyersdk.com
-DOMAIN,roovza.inapps.appsflyersdk.com
-DOMAIN,roovza.launches.appsflyersdk.com
-DOMAIN,roovza.skadsdk.appsflyersdk.com
-DOMAIN-SUFFIX,appsflyer.com
-DOMAIN-SUFFIX,adjust.com
-DOMAIN-SUFFIX,branch.io
+DOMAIN-SUFFIX,amazonses.com
+DOMAIN-SUFFIX,email.amazon.com
+DOMAIN-SUFFIX,amazonworkmail.com
+DOMAIN-SUFFIX,awsapps.com
+DOMAIN-SUFFIX,chime.aws
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎵 CapCut 剪映国际版（创作必备）
+# 📰 Amazon 帮助 & 支持
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,capcut.com
-DOMAIN-SUFFIX,capcutcdn.com
-DOMAIN-SUFFIX,capcut.net
-DOMAIN-SUFFIX,capcut.me
-DOMAIN-SUFFIX,capcutapi.com
-DOMAIN-SUFFIX,lv.capcut.com
-DOMAIN-SUFFIX,lv-cdn.capcut.com
-DOMAIN-SUFFIX,creative-assets.capcut.com
+DOMAIN-SUFFIX,help.amazon.com
+DOMAIN-SUFFIX,sellercentral-help.amazon.com
+DOMAIN-SUFFIX,amazonsellerservices.com
+DOMAIN-SUFFIX,aboutamazon.com
+DOMAIN-SUFFIX,press.aboutamazon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎤 TikTok Music & 音乐版权
+# 🔒 Amazon 安全 & 验证
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktokmusic.com
-DOMAIN-SUFFIX,music.tiktok.com
-DOMAIN-SUFFIX,tiktok-music.com
-DOMAIN-SUFFIX,sounds.tiktok.com
-DOMAIN-SUFFIX,soundon.global
+DOMAIN-SUFFIX,captcha.amazon.com
+DOMAIN-SUFFIX,opfcaptcha-prod.s3.amazonaws.com
+DOMAIN-SUFFIX,unagi.amazon.com
+DOMAIN-SUFFIX,unagi-na.amazon.com
+DOMAIN-SUFFIX,device-metrics-us.amazon.com
+DOMAIN-SUFFIX,device-metrics-us-2.amazon.com
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📧 TikTok 消息 & 通知
+# 🏷️ Amazon 其他服务
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,im.tiktok.com
-DOMAIN-SUFFIX,im-va.tiktok.com
-DOMAIN-SUFFIX,im-sg.tiktok.com
-DOMAIN-SUFFIX,msg.tiktok.com
-DOMAIN-SUFFIX,push.tiktok.com
-DOMAIN-SUFFIX,frontier.tiktok.com
-DOMAIN-SUFFIX,frontier-va.tiktok.com
-DOMAIN-SUFFIX,frontier-sg.tiktok.com
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🔍 搜索 & 发现
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,search.tiktok.com
-DOMAIN-SUFFIX,search-va.tiktok.com
-DOMAIN-SUFFIX,search-sg.tiktok.com
-DOMAIN-SUFFIX,discover.tiktok.com
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🏷️ TikTok Now & 其他产品
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,tiktoknow.com
-DOMAIN-SUFFIX,tiktok-now.com
-DOMAIN-SUFFIX,now.tiktok.com
-DOMAIN-SUFFIX,tiktok-series.com
-DOMAIN-SUFFIX,series.tiktok.com
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📰 TikTok Newsroom & 官方
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,newsroom.tiktok.com
-DOMAIN-SUFFIX,support.tiktok.com
-DOMAIN-SUFFIX,help.tiktok.com
-DOMAIN-SUFFIX,feedback.tiktok.com
-DOMAIN-SUFFIX,legal.tiktok.com
-DOMAIN-SUFFIX,privacy.tiktok.com
-DOMAIN-SUFFIX,safety.tiktok.com
-DOMAIN-SUFFIX,transparency.tiktok.com
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🌐 WebSocket & 实时通信
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,ws.tiktok.com
-DOMAIN-SUFFIX,ws-va.tiktok.com
-DOMAIN-SUFFIX,ws-sg.tiktok.com
-DOMAIN-SUFFIX,wss.tiktok.com
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🔗 短链接 & 分享
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,vm.tiktok.com
-DOMAIN-SUFFIX,vt.tiktok.com
-DOMAIN-SUFFIX,s.tiktok.com
-DOMAIN-SUFFIX,share.tiktok.com
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🛡️ 安全 & 风控
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DOMAIN-SUFFIX,rc.tiktok.com
-DOMAIN-SUFFIX,rc-va.tiktok.com
-DOMAIN-SUFFIX,rc-sg.tiktok.com
-DOMAIN-SUFFIX,risk.tiktok.com
-DOMAIN-SUFFIX,sec.tiktok.com
+DOMAIN-SUFFIX,amazon.jobs
+DOMAIN-SUFFIX,amazon.work
+DOMAIN-SUFFIX,amazonbusiness.com
+DOMAIN-SUFFIX,business.amazon.com
+DOMAIN-SUFFIX,amazoninspire.com
+DOMAIN-SUFFIX,wholefoodsmarket.com
+DOMAIN-SUFFIX,zappos.com
+DOMAIN-SUFFIX,6pm.com
+DOMAIN-SUFFIX,woot.com
+DOMAIN-SUFFIX,goodreads.com
+DOMAIN-SUFFIX,imdb.com
+DOMAIN-SUFFIX,boxofficemojo.com
