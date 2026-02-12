@@ -9,3 +9,168 @@ rules:
   - DOMAIN-SUFFIX,ipstatp.com,TKMG
   - DOMAIN-SUFFIX,muscdn.com,TKMG
   - DOMAIN-SUFFIX,musical.ly,TKMG
+
+payload:
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🎵 TikTok 主站 & 核心域名
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.tiktok.com
+  - +.tiktokv.com
+  - +.tiktokv.eu
+  - +.tiktokv.us
+  - +.tiktokw.eu
+  - +.tiktokw.us
+  - +.tiktokd.net
+  - +.tiktokd.org
+  - +.tik-tokapi.com
+  - +.musical.ly
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📦 CDN & 静态资源
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.tiktokcdn.com
+  - +.tiktokcdn-eu.com
+  - +.tiktokcdn-us.com
+  - +.tiktokeu-cdn.com
+  - +.tiktokrow-cdn.com
+  - +.tiktok-row.net
+  - +.muscdn.com
+  - +.ttlivecdn.com
+  - +.ttwstatic.com
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🌐 Akamai / EdgeSuite CDN
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.tiktokcdn-us.com.edgesuite.net
+  - +.tiktokcdn.com.akamaized.net
+  - +.tiktokcdn.com.edgesuite.net
+  - +.tiktokv.com.edgekey.net
+  - +.tiktokv.com.edgesuite.net
+  - p16-tiktokcdn-com.akamaized.net
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🏢 字节跳动海外基础设施
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.byteoversea.com
+  - +.bytedapm.com
+  - +.byteintlapi.com
+  - +.bytedance.com
+  - +.bytedance.net
+  - +.bytedance.map.fastly.net
+  - +.byteimg.com
+  - +.bytegecko.com
+  - +.bytegecko-i18n.com
+  - +.ibytedtos.com
+  - +.ibyteimg.com
+  - +.ipstatp.com
+  - +.sgpstatp.com
+  - +.sgsnssdk.com
+  - +.ttoverseaus.net
+  - +.pstatp.com
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🛒 TikTok Shop 电商
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.tiktokglobalshop.com
+  - +.tiktokglobalshopv.com
+  - +.tiktokshop.com
+  - +.tiktok-shops.com
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🎮 TikTok Minis 小程序
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.tiktok-minis.com
+  - +.tiktokminis.us
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📊 数据统计 & 分析
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.analytics.tiktok.com
+  - +.tiktokads.com
+  - +.tiktok-ads.com
+  - +.ads-tiktok.com
+  - +.tiktokbusiness.com
+  - +.tiktokbusinessapi.com
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📱 AppsFlyer 归因追踪
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - roovza-launches.appsflyersdk.com
+  - roovza.inapps.appsflyersdk.com
+  - roovza.launches.appsflyersdk.com
+  - roovza.skadsdk.appsflyersdk.com
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🔐 登录 & 认证
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.tiktoklogin.com
+  - +.tiktokregistration.com
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🎬 直播 & 视频流
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.ttlcntcdn.com
+  - +.ttlcntcdn.net
+  - +.tiktok-live.com
+  - +.webcast.tiktok.com
+  - +.lf16-tiktok-common.ibytedtos.com
+  - +.lf16-tiktok-web.ibytedtos.com
+  - +.p16-tiktok-sg.ibytedtos.com
+  - +.p16-tiktok-va.ibytedtos.com
+  - +.p16-tiktok-sign-va.ibytedtos.com
+  - +.p16-webcast.tiktok.com
+  - +.p19-webcast.tiktok.com
+  - +.p77-webcast.tiktok.com
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🌍 地区特定域名
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.tiktok.co.id
+  - +.tiktok.co.jp
+  - +.tiktok.co.kr
+  - +.tiktok.co.uk
+  - +.tiktok.com.au
+  - +.tiktok.com.br
+  - +.tiktok.com.sg
+  - +.tiktok.de
+  - +.tiktok.es
+  - +.tiktok.fr
+  - +.tiktok.it
+  - +.tiktok.nl
+  - +.tiktok.ph
+  - +.tiktok.pl
+  - +.tiktok.ru
+  - +.tiktok.th
+  - +.tiktok.tw
+  - +.tiktok.vn
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🔧 API & 开发者
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.tiktokapis.com
+  - +.tiktok-api.com
+  - +.api.tiktok.com
+  - +.api-va.tiktok.com
+  - +.api16-normal-useast1a.tiktokv.com
+  - +.api16-normal-useast2a.tiktokv.com
+  - +.api16-core-va.tiktokv.com
+  - +.api16-va.tiktokv.com
+  - +.api19-va.tiktokv.com
+  - +.api77-va.tiktokv.com
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📤 上传 & 存储
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.upload.tiktok.com
+  - +.upload-va.tiktokv.com
+  - +.mon.tiktok.com
+  - +.mon-va.tiktokv.com
+  - +.log.tiktok.com
+  - +.log-va.tiktokv.com
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🎵 CapCut 剪映国际版（关联产品）
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - +.capcut.com
+  - +.capcutcdn.com
+  - +.capcut.net
