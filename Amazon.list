@@ -1,0 +1,361 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🎵 TikTok 主站 & 核心域名
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktok.com
+DOMAIN-SUFFIX,tiktokv.com
+DOMAIN-SUFFIX,tiktokv.eu
+DOMAIN-SUFFIX,tiktokv.us
+DOMAIN-SUFFIX,tiktokw.eu
+DOMAIN-SUFFIX,tiktokw.us
+DOMAIN-SUFFIX,tiktokd.net
+DOMAIN-SUFFIX,tiktokd.org
+DOMAIN-SUFFIX,tik-tokapi.com
+DOMAIN-SUFFIX,musical.ly
+DOMAIN-SUFFIX,musically.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📦 CDN & 静态资源
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktokcdn.com
+DOMAIN-SUFFIX,tiktokcdn-eu.com
+DOMAIN-SUFFIX,tiktokcdn-us.com
+DOMAIN-SUFFIX,tiktokeu-cdn.com
+DOMAIN-SUFFIX,tiktokrow-cdn.com
+DOMAIN-SUFFIX,tiktok-row.net
+DOMAIN-SUFFIX,muscdn.com
+DOMAIN-SUFFIX,ttlivecdn.com
+DOMAIN-SUFFIX,ttwstatic.com
+DOMAIN-SUFFIX,ttcdn.com
+DOMAIN-SUFFIX,ttimg.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🌐 Akamai / EdgeSuite / Fastly CDN
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktokcdn-us.com.edgesuite.net
+DOMAIN-SUFFIX,tiktokcdn.com.akamaized.net
+DOMAIN-SUFFIX,tiktokcdn.com.edgesuite.net
+DOMAIN-SUFFIX,tiktokv.com.edgekey.net
+DOMAIN-SUFFIX,tiktokv.com.edgesuite.net
+DOMAIN,p16-tiktokcdn-com.akamaized.net
+DOMAIN-SUFFIX,bytedance.map.fastly.net
+DOMAIN-SUFFIX,tiktok.map.fastly.net
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🏢 字节跳动海外基础设施
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,byteoversea.com
+DOMAIN-SUFFIX,bytedapm.com
+DOMAIN-SUFFIX,byteintlapi.com
+DOMAIN-SUFFIX,bytedance.com
+DOMAIN-SUFFIX,bytedance.net
+DOMAIN-SUFFIX,byteimg.com
+DOMAIN-SUFFIX,bytegecko.com
+DOMAIN-SUFFIX,bytegecko-i18n.com
+DOMAIN-SUFFIX,ibytedtos.com
+DOMAIN-SUFFIX,ibyteimg.com
+DOMAIN-SUFFIX,ipstatp.com
+DOMAIN-SUFFIX,sgpstatp.com
+DOMAIN-SUFFIX,sgsnssdk.com
+DOMAIN-SUFFIX,ttoverseaus.net
+DOMAIN-SUFFIX,pstatp.com
+DOMAIN-SUFFIX,bytetcc.com
+DOMAIN-SUFFIX,bytednsdoc.com
+DOMAIN-SUFFIX,byteacctimg.com
+DOMAIN-SUFFIX,byteeffecttos.com
+DOMAIN-SUFFIX,effectivecdn.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🛒 TikTok Shop 电商（重要！）
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktokglobalshop.com
+DOMAIN-SUFFIX,tiktokglobalshopv.com
+DOMAIN-SUFFIX,tiktokshop.com
+DOMAIN-SUFFIX,tiktok-shops.com
+DOMAIN-SUFFIX,seller.tiktok.com
+DOMAIN-SUFFIX,seller-us.tiktok.com
+DOMAIN-SUFFIX,seller-uk.tiktok.com
+DOMAIN-SUFFIX,seller-id.tiktok.com
+DOMAIN-SUFFIX,seller-my.tiktok.com
+DOMAIN-SUFFIX,seller-th.tiktok.com
+DOMAIN-SUFFIX,seller-vn.tiktok.com
+DOMAIN-SUFFIX,seller-ph.tiktok.com
+DOMAIN-SUFFIX,seller-sg.tiktok.com
+DOMAIN-SUFFIX,seller-br.tiktok.com
+DOMAIN-SUFFIX,affiliate.tiktok.com
+DOMAIN-SUFFIX,affiliate-us.tiktok.com
+DOMAIN-SUFFIX,tiktokshop-seller.com
+DOMAIN-SUFFIX,tiktok-fulfillment.com
+DOMAIN-SUFFIX,tiktokshoplogistics.com
+DOMAIN-SUFFIX,tiktok-shop-logistics.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 💰 TikTok Ads 广告投放平台（重要！）
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktokads.com
+DOMAIN-SUFFIX,tiktok-ads.com
+DOMAIN-SUFFIX,ads-tiktok.com
+DOMAIN-SUFFIX,ads.tiktok.com
+DOMAIN-SUFFIX,business.tiktok.com
+DOMAIN-SUFFIX,tiktokbusiness.com
+DOMAIN-SUFFIX,tiktokbusinessapi.com
+DOMAIN-SUFFIX,business-api.tiktok.com
+DOMAIN-SUFFIX,ads-api.tiktok.com
+DOMAIN-SUFFIX,analytics.tiktok.com
+DOMAIN-SUFFIX,business-analytics.tiktok.com
+DOMAIN-SUFFIX,ad.tiktok.com
+DOMAIN-SUFFIX,adsmanager.tiktok.com
+DOMAIN-SUFFIX,getstarted.tiktok.com
+DOMAIN-SUFFIX,tiktokadsmanager.com
+DOMAIN-SUFFIX,tiktokcreativecenter.com
+DOMAIN-SUFFIX,tiktok-marketing-api.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🎨 TikTok 创作者工具 & Creator Center
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,creator.tiktok.com
+DOMAIN-SUFFIX,creator-us.tiktok.com
+DOMAIN-SUFFIX,creatormarketplace.tiktok.com
+DOMAIN-SUFFIX,tiktok-creator.com
+DOMAIN-SUFFIX,tiktokcreators.com
+DOMAIN-SUFFIX,tiktok-creator-marketplace.com
+DOMAIN-SUFFIX,creativecenter.tiktok.com
+DOMAIN-SUFFIX,creative-center.tiktok.com
+DOMAIN-SUFFIX,effect.tiktok.com
+DOMAIN-SUFFIX,effecthouse.tiktok.com
+DOMAIN-SUFFIX,tiktok-effect.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📊 数据分析 & 像素追踪
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,analytics-sg.tiktok.com
+DOMAIN-SUFFIX,analytics-va.tiktok.com
+DOMAIN-SUFFIX,pixel.tiktok.com
+DOMAIN-SUFFIX,events.tiktok.com
+DOMAIN-SUFFIX,events-api.tiktok.com
+DOMAIN-SUFFIX,mcs-va.tiktok.com
+DOMAIN-SUFFIX,mcs-sg.tiktok.com
+DOMAIN-SUFFIX,mon.tiktok.com
+DOMAIN-SUFFIX,mon-va.tiktokv.com
+DOMAIN-SUFFIX,log.tiktok.com
+DOMAIN-SUFFIX,log-va.tiktokv.com
+DOMAIN-SUFFIX,abtest-va.tiktokv.com
+DOMAIN-SUFFIX,abtest-sg.tiktokv.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 💳 支付 & 钱包
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktokpay.com
+DOMAIN-SUFFIX,tiktok-pay.com
+DOMAIN-SUFFIX,pay.tiktok.com
+DOMAIN-SUFFIX,wallet.tiktok.com
+DOMAIN-SUFFIX,coins.tiktok.com
+DOMAIN-SUFFIX,payment.tiktok.com
+DOMAIN-SUFFIX,checkout.tiktok.com
+DOMAIN-SUFFIX,tiktok-checkout.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🎬 直播 & 视频流
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,ttlcntcdn.com
+DOMAIN-SUFFIX,ttlcntcdn.net
+DOMAIN-SUFFIX,tiktok-live.com
+DOMAIN-SUFFIX,live.tiktok.com
+DOMAIN-SUFFIX,webcast.tiktok.com
+DOMAIN-SUFFIX,webcast-va.tiktok.com
+DOMAIN-SUFFIX,webcast-sg.tiktok.com
+DOMAIN-SUFFIX,lf16-tiktok-common.ibytedtos.com
+DOMAIN-SUFFIX,lf16-tiktok-web.ibytedtos.com
+DOMAIN-SUFFIX,p16-tiktok-sg.ibytedtos.com
+DOMAIN-SUFFIX,p16-tiktok-va.ibytedtos.com
+DOMAIN-SUFFIX,p16-tiktok-sign-va.ibytedtos.com
+DOMAIN-SUFFIX,p16-webcast.tiktok.com
+DOMAIN-SUFFIX,p19-webcast.tiktok.com
+DOMAIN-SUFFIX,p77-webcast.tiktok.com
+DOMAIN-SUFFIX,pull-flv-l1-mus.pstatp.com
+DOMAIN-SUFFIX,pull-hls-l1-mus.pstatp.com
+DOMAIN-SUFFIX,pull-rtmp-l1-mus.pstatp.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🎮 TikTok Minis 小程序
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktok-minis.com
+DOMAIN-SUFFIX,tiktokminis.us
+DOMAIN-SUFFIX,minis.tiktok.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🔐 登录 & 认证 & 安全
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktoklogin.com
+DOMAIN-SUFFIX,tiktokregistration.com
+DOMAIN-SUFFIX,login.tiktok.com
+DOMAIN-SUFFIX,accounts.tiktok.com
+DOMAIN-SUFFIX,sso.tiktok.com
+DOMAIN-SUFFIX,auth.tiktok.com
+DOMAIN-SUFFIX,security.tiktok.com
+DOMAIN-SUFFIX,verify.tiktok.com
+DOMAIN-SUFFIX,captcha.tiktok.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🌍 地区特定域名
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktok.co.id
+DOMAIN-SUFFIX,tiktok.co.jp
+DOMAIN-SUFFIX,tiktok.co.kr
+DOMAIN-SUFFIX,tiktok.co.uk
+DOMAIN-SUFFIX,tiktok.com.au
+DOMAIN-SUFFIX,tiktok.com.br
+DOMAIN-SUFFIX,tiktok.com.sg
+DOMAIN-SUFFIX,tiktok.com.mx
+DOMAIN-SUFFIX,tiktok.com.my
+DOMAIN-SUFFIX,tiktok.de
+DOMAIN-SUFFIX,tiktok.es
+DOMAIN-SUFFIX,tiktok.fr
+DOMAIN-SUFFIX,tiktok.it
+DOMAIN-SUFFIX,tiktok.nl
+DOMAIN-SUFFIX,tiktok.ph
+DOMAIN-SUFFIX,tiktok.pl
+DOMAIN-SUFFIX,tiktok.ru
+DOMAIN-SUFFIX,tiktok.th
+DOMAIN-SUFFIX,tiktok.tw
+DOMAIN-SUFFIX,tiktok.vn
+DOMAIN-SUFFIX,tiktok.sa
+DOMAIN-SUFFIX,tiktok.ae
+DOMAIN-SUFFIX,tiktok.eg
+DOMAIN-SUFFIX,tiktok.pk
+DOMAIN-SUFFIX,tiktok.ng
+DOMAIN-SUFFIX,tiktok.za
+DOMAIN-SUFFIX,tiktok.tr
+DOMAIN-SUFFIX,tiktok.in
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🔧 API & 开发者
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktokapis.com
+DOMAIN-SUFFIX,tiktok-api.com
+DOMAIN-SUFFIX,api.tiktok.com
+DOMAIN-SUFFIX,api-va.tiktok.com
+DOMAIN-SUFFIX,api-sg.tiktok.com
+DOMAIN-SUFFIX,open.tiktok.com
+DOMAIN-SUFFIX,open-api.tiktok.com
+DOMAIN-SUFFIX,developers.tiktok.com
+DOMAIN-SUFFIX,api16-normal-useast1a.tiktokv.com
+DOMAIN-SUFFIX,api16-normal-useast2a.tiktokv.com
+DOMAIN-SUFFIX,api16-core-va.tiktokv.com
+DOMAIN-SUFFIX,api16-va.tiktokv.com
+DOMAIN-SUFFIX,api19-va.tiktokv.com
+DOMAIN-SUFFIX,api77-va.tiktokv.com
+DOMAIN-SUFFIX,api16-core-sg.tiktokv.com
+DOMAIN-SUFFIX,api16-sg.tiktokv.com
+DOMAIN-SUFFIX,api19-sg.tiktokv.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📤 上传 & 存储
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,upload.tiktok.com
+DOMAIN-SUFFIX,upload-va.tiktokv.com
+DOMAIN-SUFFIX,upload-sg.tiktokv.com
+DOMAIN-SUFFIX,tos-useast2a.bytegecko.com
+DOMAIN-SUFFIX,tos-alisg.bytegecko.com
+DOMAIN-SUFFIX,sf16-sg.tiktokcdn.com
+DOMAIN-SUFFIX,sf16-va.tiktokcdn.com
+DOMAIN-SUFFIX,v16-webapp.tiktok.com
+DOMAIN-SUFFIX,v19-webapp.tiktok.com
+DOMAIN-SUFFIX,v77-webapp.tiktok.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📱 AppsFlyer & 第三方归因
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN,roovza-launches.appsflyersdk.com
+DOMAIN,roovza.inapps.appsflyersdk.com
+DOMAIN,roovza.launches.appsflyersdk.com
+DOMAIN,roovza.skadsdk.appsflyersdk.com
+DOMAIN-SUFFIX,appsflyer.com
+DOMAIN-SUFFIX,adjust.com
+DOMAIN-SUFFIX,branch.io
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🎵 CapCut 剪映国际版（创作必备）
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,capcut.com
+DOMAIN-SUFFIX,capcutcdn.com
+DOMAIN-SUFFIX,capcut.net
+DOMAIN-SUFFIX,capcut.me
+DOMAIN-SUFFIX,capcutapi.com
+DOMAIN-SUFFIX,lv.capcut.com
+DOMAIN-SUFFIX,lv-cdn.capcut.com
+DOMAIN-SUFFIX,creative-assets.capcut.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🎤 TikTok Music & 音乐版权
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktokmusic.com
+DOMAIN-SUFFIX,music.tiktok.com
+DOMAIN-SUFFIX,tiktok-music.com
+DOMAIN-SUFFIX,sounds.tiktok.com
+DOMAIN-SUFFIX,soundon.global
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📧 TikTok 消息 & 通知
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,im.tiktok.com
+DOMAIN-SUFFIX,im-va.tiktok.com
+DOMAIN-SUFFIX,im-sg.tiktok.com
+DOMAIN-SUFFIX,msg.tiktok.com
+DOMAIN-SUFFIX,push.tiktok.com
+DOMAIN-SUFFIX,frontier.tiktok.com
+DOMAIN-SUFFIX,frontier-va.tiktok.com
+DOMAIN-SUFFIX,frontier-sg.tiktok.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🔍 搜索 & 发现
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,search.tiktok.com
+DOMAIN-SUFFIX,search-va.tiktok.com
+DOMAIN-SUFFIX,search-sg.tiktok.com
+DOMAIN-SUFFIX,discover.tiktok.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🏷️ TikTok Now & 其他产品
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,tiktoknow.com
+DOMAIN-SUFFIX,tiktok-now.com
+DOMAIN-SUFFIX,now.tiktok.com
+DOMAIN-SUFFIX,tiktok-series.com
+DOMAIN-SUFFIX,series.tiktok.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📰 TikTok Newsroom & 官方
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,newsroom.tiktok.com
+DOMAIN-SUFFIX,support.tiktok.com
+DOMAIN-SUFFIX,help.tiktok.com
+DOMAIN-SUFFIX,feedback.tiktok.com
+DOMAIN-SUFFIX,legal.tiktok.com
+DOMAIN-SUFFIX,privacy.tiktok.com
+DOMAIN-SUFFIX,safety.tiktok.com
+DOMAIN-SUFFIX,transparency.tiktok.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🌐 WebSocket & 实时通信
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,ws.tiktok.com
+DOMAIN-SUFFIX,ws-va.tiktok.com
+DOMAIN-SUFFIX,ws-sg.tiktok.com
+DOMAIN-SUFFIX,wss.tiktok.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🔗 短链接 & 分享
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,vm.tiktok.com
+DOMAIN-SUFFIX,vt.tiktok.com
+DOMAIN-SUFFIX,s.tiktok.com
+DOMAIN-SUFFIX,share.tiktok.com
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🛡️ 安全 & 风控
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOMAIN-SUFFIX,rc.tiktok.com
+DOMAIN-SUFFIX,rc-va.tiktok.com
+DOMAIN-SUFFIX,rc-sg.tiktok.com
+DOMAIN-SUFFIX,risk.tiktok.com
+DOMAIN-SUFFIX,sec.tiktok.com
