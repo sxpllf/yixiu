@@ -96,6 +96,14 @@ proxies:
     client-fingerprint: chrome
     skip-cert-verify: false
 
+  - name: 国内落地-沪
+    type: ss
+    server: 118.31.79.16
+    port: 8388
+    cipher: aes-256-gcm
+    password: "Woaini.123"
+    udp: true
+
 # ========================
 # 端口设置
 # ========================
@@ -312,7 +320,7 @@ proxy-groups:
 
   - name: 国内
     type: select
-    proxies: [直连, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 拒绝]
+    proxies: [国内落地-沪, 直连, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 拒绝]
 
   - name: 其他
     type: select
@@ -635,5 +643,3 @@ rule-providers:
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   BiliBili / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
-
-
