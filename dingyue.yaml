@@ -6,7 +6,7 @@
 proxy-providers:
   红杏云:
     exclude-filter: "(?i)剩余|到期|官网|套餐|流量|时间|应急|测试|过期|重置"
-    url: "https://106.55.228.246:36666/hxvip?token=f73b5e650f2426852bb66d1baefc6a71"
+    url: "https://106.55.228.246:36666/hxvip?token=742befa84dbc6a69200c1bb0583c0f9f"
     type: http
     interval: 21600
     path: ./providers/hx.yaml
@@ -17,13 +17,25 @@ proxy-providers:
     override:
       udp: true
       skip-cert-verify: false
-
   聚合:
     exclude-filter: "(?i)剩余|到期|官网|套餐|流量|时间|应急|测试|过期|重置"
-    url: "http://65.49.233.36:3001/Woaini.123/download/collection/zixiju"
+    url: https://bwg.yixiu.edu.kg/Woaini.123/download/collection/zixiju
     type: http
     interval: 21600
-    path: ./providers/hsy.yaml
+    path: ./providers/zixiju.yaml
+    health-check:
+      enable: true
+      url: http://cp.cloudflare.com/generate_204
+      interval: 180
+    override:
+      udp: true
+      skip-cert-verify: false
+  火烧云:
+    exclude-filter: "(?i)剩余|到期|官网|套餐|流量|时间|应急|测试|过期|重置"
+    url: "https://onehsy.yeniudsss.us/mj/v8/front/mysubnew?token=ab0aad9a317a8d539f3fb8f24c73b273&timestamp=1771970827&sign=26fbbcb1ac147bd8220efbd96c4d3252"
+    type: http
+    interval: 21600
+    path: ./providers/hsc.yaml
     health-check:
       enable: true
       url: http://cp.cloudflare.com/generate_204
@@ -78,9 +90,10 @@ proxies:
     udp: true
     network: tcp
     tls: true
+    servername: 108.66.217.25
     alpn: [h2, http/1.1]
     client-fingerprint: chrome
-    skip-cert-verify: false
+    skip-cert-verify: true
 
   - name: 国内落地-沪
     type: ss
@@ -239,11 +252,11 @@ proxy-groups:
 
   - name: ChatGPT
     type: select
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
 
   - name: Claude
     type: select
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
 
   - name: Gemini
     type: select
@@ -279,11 +292,11 @@ proxy-groups:
 
   - name: TikTok-专用
     type: select
-    proxies: [MGTK, 美国-故转, 日本-故转, 新加坡-故转, 韩国-故转, 香港-故转, 台湾-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
 
   - name: T-mobile
     type: select
-    proxies: [MGTK, 美国-故转, 日本-故转, 新加坡-故转, 韩国-故转, 香港-故转, 台湾-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
 
   - name: Telegram
     type: select
@@ -343,15 +356,15 @@ proxy-groups:
 
   - name: Amazon
     type: select
-    proxies: [香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 落地-108, 英国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
 
   - name: Steam
     type: select
-    proxies: [香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 落地-108, 英国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
 
   - name: Games
     type: select
-    proxies: [香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 落地-108, 英国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
 
   - name: BiliBili
     type: select
@@ -382,68 +395,36 @@ proxy-groups:
   # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   - name: 香港-故转
-    type: fallback
-    proxies: [香港-手动, 香港-自动]
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    lazy: false
-    max-failed-attempts: 3
+    type: select
+    proxies: [香港-自动, 香港-手动]
 
   - name: 台湾-故转
-    type: fallback
-    proxies: [台湾-手动, 台湾-自动]
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    lazy: false
-    max-failed-attempts: 3
+    type: select
+    proxies: [台湾-自动, 台湾-手动]
 
   - name: 日本-故转
-    type: fallback
-    proxies: [日本-手动, 日本-自动]
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    lazy: false
-    max-failed-attempts: 3
+    type: select
+    proxies: [日本-自动, 日本-手动]
 
   - name: 韩国-故转
-    type: fallback
-    proxies: [韩国-手动, 韩国-自动]
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    lazy: false
-    max-failed-attempts: 3
+    type: select
+    proxies: [韩国-自动, 韩国-手动]
 
   - name: 新加坡-故转
-    type: fallback
-    proxies: [新加坡-手动, 新加坡-自动]
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    lazy: false
-    max-failed-attempts: 3
+    type: select
+    proxies: [新加坡-自动, 新加坡-手动]
 
   - name: 美国-故转
-    type: fallback
-    proxies: [美国-手动, 美国-自动]
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    lazy: false
-    max-failed-attempts: 3
+    type: select
+    proxies: [美国-自动, 美国-手动]
 
   - name: 英国-故转
-    type: fallback
-    proxies: [英国-手动, 英国-自动]
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    lazy: false
-    max-failed-attempts: 3
+    type: select
+    proxies: [英国-自动, 英国-手动]
 
   - name: 其他-故转
-    type: fallback
-    proxies: [其他-手动, 其他-自动]
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    lazy: false
-    max-failed-attempts: 3
+    type: select
+    proxies: [其他-自动, 其他-手动]
 
   - name: 故障转移
     type: fallback
@@ -459,12 +440,12 @@ proxy-groups:
 
   - name: 香港-手动
     type: select
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广港|香港|HK|Hong\\s*Kong|HongKong|🇭🇰)"
 
   - name: 香港-自动
     type: url-test
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广港|香港|HK|Hong\\s*Kong|HongKong|🇭🇰)"
     url: http://cp.cloudflare.com/generate_204
     interval: 300
@@ -472,12 +453,12 @@ proxy-groups:
 
   - name: 台湾-手动
     type: select
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广台|台湾|台灣|TW|Tai\\s*wan|TaiWan|🇹🇼)"
 
   - name: 台湾-自动
     type: url-test
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广台|台湾|台灣|TW|Tai\\s*wan|TaiWan|🇹🇼)"
     url: http://cp.cloudflare.com/generate_204
     interval: 300
@@ -485,12 +466,12 @@ proxy-groups:
 
   - name: 日本-手动
     type: select
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广日|日本|JP|Tokyo|Osaka|东京|大阪|埼玉|🇯🇵|Japan)"
 
   - name: 日本-自动
     type: url-test
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广日|日本|JP|Tokyo|Osaka|东京|大阪|埼玉|🇯🇵|Japan)"
     url: http://cp.cloudflare.com/generate_204
     interval: 300
@@ -498,12 +479,12 @@ proxy-groups:
 
   - name: 韩国-手动
     type: select
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广韩|韩国|韓國|KR|Seoul|首尔|🇰🇷|Korea)"
 
   - name: 韩国-自动
     type: url-test
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广韩|韩国|韓國|KR|Seoul|首尔|🇰🇷|Korea)"
     url: http://cp.cloudflare.com/generate_204
     interval: 300
@@ -511,12 +492,12 @@ proxy-groups:
 
   - name: 新加坡-手动
     type: select
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广新|新加坡|SG|Singapore|狮城|坡|🇸🇬)"
 
   - name: 新加坡-自动
     type: url-test
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广新|新加坡|SG|Singapore|狮城|坡|🇸🇬)"
     url: http://cp.cloudflare.com/generate_204
     interval: 300
@@ -524,12 +505,12 @@ proxy-groups:
 
   - name: 美国-手动
     type: select
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广美|美国|US|United\\s*States|Los\\s*Angeles|San\\s*Jose|Dallas|New\\s*York|洛杉|圣何塞|达拉斯|纽约|🇺🇸)"
 
   - name: 美国-自动
     type: url-test
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(广美|美国|US|United\\s*States|Los\\s*Angeles|San\\s*Jose|Dallas|New\\s*York|洛杉|圣何塞|达拉斯|纽约|🇺🇸)"
     url: http://cp.cloudflare.com/generate_204
     interval: 300
@@ -537,12 +518,12 @@ proxy-groups:
 
   - name: 英国-手动
     type: select
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(英国|UK|United\\s*Kingdom|London|伦敦|🇬🇧)"
 
   - name: 英国-自动
     type: url-test
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     filter: "(?i)(英国|UK|United\\s*Kingdom|London|伦敦|🇬🇧)"
     url: http://cp.cloudflare.com/generate_204
     interval: 300
@@ -562,11 +543,11 @@ proxy-groups:
 
   - name: 所有-手动
     type: select
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
 
   - name: 所有-自动
     type: url-test
-    use: [红杏云, 聚合, 多宝]
+    use: [红杏云, 火烧云, 多宝]
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     tolerance: 100
@@ -660,7 +641,7 @@ rule-providers:
     behavior: classical
     format: text
     interval: 21600
-    url: "https://gh-proxy.com/https://raw.githubusercontent.com/sxpllf/yixiu/refs/heads/main/T-Mobile.list"
+    url: "https://gh-proxy.com/raw.githubusercontent.com/sxpllf/yixiu/refs/heads/main/T-Mobile.list"
 
   TEST / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Check.list"}
   ChatGPT / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs"}
