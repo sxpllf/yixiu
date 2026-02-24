@@ -252,7 +252,7 @@ proxy-groups:
 
   - name: ChatGPT
     type: select
-    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
+    proxies: [MGTK,落地-108,新加坡-故转,美国-故转, 拒绝]  # 家宽美国落地，故障宁断不降级
 
   - name: Claude
     type: select
@@ -296,7 +296,7 @@ proxy-groups:
 
   - name: T-mobile
     type: select
-    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
+    proxies: [MGTK,美国-故转, 拒绝]  # 家宽美国落地，故障宁断不降级
 
   - name: Telegram
     type: select
@@ -702,3 +702,4 @@ rule-providers:
   Cloudflare / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cloudflare.mrs"}
   OneDrive / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/onedrive.mrs"}
   BiliBili / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
+
