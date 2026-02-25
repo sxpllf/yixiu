@@ -1,13 +1,12 @@
 # ========================
 # Clash-ALL 运维终稿
 # 策略组顺序：分流业务组 → 地区故转组 → 基础全量组
-# 修复：微信/闲鱼收发消息问题（国内直连优先）
 # ========================
 
 proxy-providers:
   红杏云:
     exclude-filter: "(?i)剩余|到期|官网|套餐|流量|时间|应急|测试|过期|重置"
-    url: "https://106.55.228.246:36666/hxvip?token=742befa84dbc6a69200c1bb0583c0f9f"
+    url: "https://bwg.yixiu.edu.kg/Woaini.123/download/collection/zixiju"
     type: http
     interval: 21600
     path: ./providers/hx.yaml
@@ -33,7 +32,7 @@ proxy-providers:
       skip-cert-verify: false
   火烧云:
     exclude-filter: "(?i)剩余|到期|官网|套餐|流量|时间|应急|测试|过期|重置"
-    url: "https://onehsy.yeniudsss.us/mj/v8/front/mysubnew?token=ab0aad9a317a8d539f3fb8f24c73b273&timestamp=1771970827&sign=26fbbcb1ac147bd8220efbd96c4d3252"
+    url: "https://bwg.yixiu.edu.kg/Woaini.123/download/collection/zixiju"
     type: http
     interval: 21600
     path: ./providers/hsc.yaml
@@ -63,6 +62,34 @@ proxy-providers:
 # 本地节点
 # ========================
 proxies:
+  - name: 香港-搬瓦工-美国家宽
+    type: vless
+    server: 47.86.249.58
+    port: 15599
+    uuid: bb43a759-26fa-4756-b14f-5b02357cdbd6
+    network: tcp
+    tls: true
+    udp: true
+    servername: aws.amazon.com
+    reality-opts:
+      public-key: 1T28q5AbvK4gbGLwxftSv0SmjznZq-mmBDEZneZ1t18
+      short-id: 57eeaecbeeaa8a64
+    client-fingerprint: chrome
+
+  - name: 香港-闲鱼-ijdj9l9e
+    type: vless
+    server: 47.86.249.58
+    port: 41528
+    uuid: 97672a88-ec39-4234-a102-1df6f9236f36
+    network: tcp
+    tls: true
+    udp: true
+    servername: www.apple.com
+    reality-opts:
+      public-key: vSXM6NtiXtPcwqZpXCTpKLBOPewzcEfr9-p18aiywio
+      short-id: b4
+    client-fingerprint: chrome
+
   - name: 直连
     type: direct
 
@@ -96,6 +123,20 @@ proxies:
     client-fingerprint: chrome
     skip-cert-verify: true
 
+  - name: 香港中转美国家宽
+    type: vless
+    server: 47.86.249.58
+    port: 15311
+    uuid: 93d7c85a-e1f3-4323-93a6-dc43162ec5f7
+    network: tcp
+    tls: true
+    udp: true
+    servername: www.amazon.com
+    reality-opts:
+      public-key: aL7Vt6HW2dCxfAK5IRrOJGA8_tShzonY-e8Iqe1yAQE
+      short-id: 294c33ba34
+    client-fingerprint: chrome
+
   - name: 国内落地-沪
     type: ss
     server: 118.31.79.16
@@ -123,8 +164,7 @@ geox-url:
   geosite: "https://gh-proxy.com/github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
   mmdb: "https://gh-proxy.com/github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb"
   asn: "https://gh-proxy.com/github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
-# 修复：无线网络keep-alive从15改为30，减少断连
-keep-alive-interval: 30
+keep-alive-interval: 15
 
 external-controller: 127.0.0.1:9090
 secret: "a123456"
@@ -200,26 +240,6 @@ dns:
     - time.cloudflare.com
     - +.wechat.com
     - +.weixin.com
-    # ====== 修复新增：微信消息相关域名 ======
-    - +.wx.qq.com
-    - +.wx2.qq.com
-    - +.wx8.qq.com
-    - +.mmxmsg.com
-    - +.shortvideo.weixin.qq.com
-    - +.long.weixin.qq.com
-    - +.weixin110.qq.com
-    # ====== 修复新增：闲鱼/阿里系域名 ======
-    - +.goofish.com
-    - +.taobao.com
-    - +.alicdn.com
-    - +.alipay.com
-    - +.aliyuncs.com
-    - +.alibaba.com
-    - +.amap.com
-    - +.xianyu.taobao.com
-    - +.tmall.com
-    - +.alipayobjects.com
-    - +.aliapp.org
 
 # ========================
 # TUN 模块
@@ -262,13 +282,6 @@ sniffer:
     - +.bilibili.com
     - +.youku.com
     - +.iqiyi.com
-    # ====== 修复新增：闲鱼/阿里系 ======
-    - +.goofish.com
-    - +.alipay.com
-    - +.aliyuncs.com
-    - +.alicdn.com
-    - +.alibaba.com
-    - +.amap.com
 
 # ========================
 # 策略组（按使用频率排序：分流 → 地区 → 基础）
@@ -280,142 +293,172 @@ proxy-groups:
   # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   - name: ChatGPT
-    type: select
-    proxies: [MGTK,落地-108,新加坡-故转,美国-故转, 拒绝]  # 家宽美国落地，故障宁断不降级
+    type: fallback
+    proxies: [香港-搬瓦工-美国家宽, MGTK, 香港中转美国家宽, 落地-108, 美国-故转, 拒绝]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: Claude
-    type: select
-    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
+    type: fallback
+    proxies: [香港-搬瓦工-美国家宽, MGTK, 香港中转美国家宽, 落地-108, 美国-故转, 拒绝]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: Gemini
-    type: select
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    type: fallback
+    proxies: [香港-搬瓦工-美国家宽, MGTK, 香港中转美国家宽, 落地-108, 美国-故转, 拒绝]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: Copilot
-    type: select
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    type: fallback
+    proxies: [香港-搬瓦工-美国家宽, MGTK, 香港中转美国家宽, 落地-108, 美国-故转, 拒绝]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: Perplexity
-    type: select
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    type: fallback
+    proxies: [香港-搬瓦工-美国家宽, MGTK, 香港中转美国家宽, 落地-108, 美国-故转, 拒绝]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: Meta AI
-    type: select
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    type: fallback
+    proxies: [香港-搬瓦工-美国家宽, MGTK, 香港中转美国家宽, 落地-108, 美国-故转, 拒绝]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: Grok
-    type: select
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    type: fallback
+    proxies: [香港-搬瓦工-美国家宽, MGTK, 落地-108, 香港中转美国家宽, 美国-故转, 拒绝]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: Groq
-    type: select
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    type: fallback
+    proxies: [香港-搬瓦工-美国家宽, MGTK, 落地-108, 香港中转美国家宽, 美国-故转, 拒绝]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: GitHub
     type: select
-    proxies: [香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: Twitter
     type: select
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
 
   - name: TikTok-专用
     type: select
-    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
+    proxies: [香港-搬瓦工-美国家宽, 香港中转美国家宽, MGTK, 落地-108, 拒绝]
 
   - name: T-mobile
     type: select
-    proxies: [MGTK,美国-故转, 拒绝]  # 家宽美国落地，故障宁断不降级
+    proxies: [香港-搬瓦工-美国家宽, 香港中转美国家宽, MGTK, 落地-108, 美国-故转, 日本-故转, 新加坡-故转, 韩国-故转, 香港-故转, 台湾-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 拒绝]
 
   - name: Telegram
     type: select
-    proxies: [香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: WhatsApp
     type: select
-    proxies: [香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: Facebook
     type: select
-    proxies: [香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: Reddit
     type: select
-    proxies: [香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: YouTube
     type: select
-    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: Netflix
     type: select
-    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: Disney
     type: select
-    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: HBO
     type: select
-    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: Spotify
     type: select
-    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: Crunchyroll
     type: select
-    proxies: [香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, MGTK, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: Crypto
     type: select
-    proxies: [MGTK, 落地-108, 美国-故转, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 所有-手动, 所有-自动, 直连, 拒绝]
+    proxies: [台湾-故转, 香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, MGTK, 落地-108, 美国-故转, 香港-故转, 新加坡-故转, 日本-故转, 韩国-故转, 其他-故转, 故障转移, 所有-手动, 所有-自动, 直连, 拒绝]
 
   - name: Apple
     type: select
-    proxies: [直连, 所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 拒绝]
+    proxies: [直连, 香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 拒绝]
 
   - name: Google
     type: select
-    proxies: [香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 直连, 拒绝]
 
   - name: Microsoft
     type: select
-    proxies: [直连, 所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 拒绝]
+    proxies: [直连, 香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 所有-自动, 所有-手动, MGTK, 香港-故转, 新加坡-故转, 日本-故转, 美国-故转, 台湾-故转, 韩国-故转, 其他-故转, 故障转移, 落地-108, 拒绝]
 
   - name: Amazon
     type: select
-    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
+    proxies: [香港-搬瓦工-美国家宽, 香港中转美国家宽, 香港-闲鱼-ijdj9l9e, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 落地-108, 英国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 直连, 拒绝]
 
   - name: Steam
     type: select
-    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
+    proxies: [直连, 香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 落地-108, 英国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 拒绝]
 
   - name: Games
     type: select
-    proxies: [MGTK, 拒绝]  # 家宽美国落地，故障宁断不降级
+    proxies: [直连, 香港-闲鱼-ijdj9l9e, 香港中转美国家宽, 香港-搬瓦工-美国家宽, 香港-故转, 新加坡-故转, 日本-故转, 台湾-故转, 韩国-故转, 美国-故转, MGTK, 落地-108, 英国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 拒绝]
 
-  # 修复：BiliBili 直连放第一，国内用户不需要绕道
   - name: BiliBili
     type: select
-    proxies: [直连, 国内落地-沪, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 拒绝]
+    proxies: [直连, 香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 国内落地-沪, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 拒绝]
 
   - name: 国外
     type: select
-    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 香港中转美国家宽, 所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
 
-  # 修复：国内策略组 直连放第一，解决微信/闲鱼/国内App消息问题
   - name: 国内
     type: select
-    proxies: [直连, 国内落地-沪, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 拒绝]
+    proxies: [直连, 香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 国内落地-沪, MGTK, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 故障转移, 所有-自动, 所有-手动, 落地-108, 拒绝]
 
   - name: 其他
     type: select
-    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
 
   - name: Test
     type: select
-    proxies: [所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
 
   - name: Block
     type: select
@@ -426,40 +469,72 @@ proxy-groups:
   # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   - name: 香港-故转
-    type: select
-    proxies: [香港-自动, 香港-手动]
+    type: fallback
+    proxies: [香港-闲鱼-ijdj9l9e, 香港-手动, 香港-自动]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: 台湾-故转
-    type: select
-    proxies: [台湾-自动, 台湾-手动]
+    type: fallback
+    proxies: [台湾-手动, 台湾-自动, 香港-故转, 所有-自动]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: 日本-故转
-    type: select
-    proxies: [日本-自动, 日本-手动]
+    type: fallback
+    proxies: [日本-手动, 日本-自动, 香港-故转, 所有-自动]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: 韩国-故转
-    type: select
-    proxies: [韩国-自动, 韩国-手动]
+    type: fallback
+    proxies: [韩国-手动, 韩国-自动, 香港-故转, 所有-自动]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: 新加坡-故转
-    type: select
-    proxies: [新加坡-自动, 新加坡-手动]
+    type: fallback
+    proxies: [新加坡-手动, 新加坡-自动, 香港-故转, 所有-自动]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: 美国-故转
-    type: select
-    proxies: [美国-自动, 美国-手动]
+    type: fallback
+    proxies: [美国-手动, 美国-自动, 香港-故转, 所有-自动]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: 英国-故转
-    type: select
-    proxies: [英国-自动, 英国-手动]
+    type: fallback
+    proxies: [英国-手动, 英国-自动, 香港-故转, 所有-自动]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: 其他-故转
-    type: select
-    proxies: [其他-自动, 其他-手动]
+    type: fallback
+    proxies: [其他-手动, 其他-自动, 香港-故转, 所有-自动]
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: false
+    max-failed-attempts: 3
 
   - name: 故障转移
     type: fallback
-    proxies: [MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 所有-自动]
+    proxies: [香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 其他-故转, 所有-自动]
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     lazy: false
