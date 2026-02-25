@@ -157,7 +157,7 @@ mode: rule
 log-level: warning
 unified-delay: true
 tcp-concurrent: true
-find-process-mode: strict
+find-process-mode: always
 geodata-mode: true
 geox-url:
   geoip: "https://gh-proxy.com/github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
@@ -245,9 +245,9 @@ dns:
 # TUN 模块
 # ========================
 tun:
-  enable: true
+  enable: false
   stack: gvisor
-  endpoint-independent-nat: true
+  endpoint-independent-nat: false
   auto-route: false
   auto-detect-interface: false
   auto-redirect: false
@@ -264,8 +264,8 @@ sniffer:
       ports: [443, 8443]
     HTTP:
       ports: [80, 8080]
-    QUIC:
-      ports: [443]
+    # QUIC:
+    #   ports: [443]
   skip-domain:
     - +.push.apple.com
     - +.apple.com
@@ -454,11 +454,11 @@ proxy-groups:
 
   - name: 其他
     type: select
-    proxies: [香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+    proxies: [直连, 香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 拒绝]
 
   - name: Test
     type: select
-    proxies: [香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 直连, 拒绝]
+    proxies: [直连, 香港-闲鱼-ijdj9l9e, 香港-搬瓦工-美国家宽, 所有-自动, 所有-手动, MGTK, 落地-108, 香港-故转, 台湾-故转, 日本-故转, 韩国-故转, 新加坡-故转, 美国-故转, 英国-故转, 其他-故转, 故障转移, 拒绝]
 
   - name: Block
     type: select
@@ -668,6 +668,41 @@ rules:
   - IP-CIDR,10.0.0.0/8,直连,no-resolve
   - IP-CIDR,172.16.0.0/12,直连,no-resolve
   - IP-CIDR,127.0.0.0/8,直连,no-resolve
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 硬编码国内域名直连（不依赖远程规则集）
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - DOMAIN-SUFFIX,baidu.com,国内
+  - DOMAIN-SUFFIX,bdstatic.com,国内
+  - DOMAIN-SUFFIX,qq.com,国内
+  - DOMAIN-SUFFIX,wechat.com,国内
+  - DOMAIN-SUFFIX,weixin.com,国内
+  - DOMAIN-SUFFIX,qpic.cn,国内
+  - DOMAIN-SUFFIX,taobao.com,国内
+  - DOMAIN-SUFFIX,tmall.com,国内
+  - DOMAIN-SUFFIX,alicdn.com,国内
+  - DOMAIN-SUFFIX,alipay.com,国内
+  - DOMAIN-SUFFIX,alibaba.com,国内
+  - DOMAIN-SUFFIX,jd.com,国内
+  - DOMAIN-SUFFIX,360buy.com,国内
+  - DOMAIN-SUFFIX,douyin.com,国内
+  - DOMAIN-SUFFIX,bytedance.com,国内
+  - DOMAIN-SUFFIX,toutiao.com,国内
+  - DOMAIN-SUFFIX,weibo.com,国内
+  - DOMAIN-SUFFIX,sinaimg.cn,国内
+  - DOMAIN-SUFFIX,xiaohongshu.com,国内
+  - DOMAIN-SUFFIX,meituan.com,国内
+  - DOMAIN-SUFFIX,dianping.com,国内
+  - DOMAIN-SUFFIX,eleme.cn,国内
+  - DOMAIN-SUFFIX,pinduoduo.com,国内
+  - DOMAIN-SUFFIX,kuaishou.com,国内
+  - DOMAIN-SUFFIX,iqiyi.com,国内
+  - DOMAIN-SUFFIX,youku.com,国内
+  - DOMAIN-SUFFIX,163.com,国内
+  - DOMAIN-SUFFIX,126.com,国内
+  - DOMAIN-SUFFIX,bilibili.com,国内
+  - DOMAIN-SUFFIX,zhihu.com,国内
+  - DOMAIN-SUFFIX,sohu.com,国内
+  - DOMAIN-SUFFIX,ipv6zhillian.com,拒绝
   # 广告拦截
   - RULE-SET,Block / Domain,Block
   # T-Mobile
@@ -730,6 +765,60 @@ rules:
   - RULE-SET,China / IP,国内,no-resolve
   - RULE-SET,Private / Domain,国内
   - RULE-SET,TEST / Domain,Test
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 硬编码国内IP直连（不依赖geoip.dat，开机即生效）
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - IP-CIDR,1.0.1.0/24,国内,no-resolve
+  - IP-CIDR,1.0.2.0/23,国内,no-resolve
+  - IP-CIDR,1.0.8.0/21,国内,no-resolve
+  - IP-CIDR,1.1.0.0/24,国内,no-resolve
+  - IP-CIDR,1.2.0.0/23,国内,no-resolve
+  - IP-CIDR,14.0.0.0/11,国内,no-resolve
+  - IP-CIDR,27.0.0.0/10,国内,no-resolve
+  - IP-CIDR,36.0.0.0/11,国内,no-resolve
+  - IP-CIDR,39.64.0.0/11,国内,no-resolve
+  - IP-CIDR,42.0.0.0/8,国内,no-resolve
+  - IP-CIDR,43.224.0.0/11,国内,no-resolve
+  - IP-CIDR,47.0.0.0/10,国内,no-resolve
+  - IP-CIDR,49.0.0.0/10,国内,no-resolve
+  - IP-CIDR,58.0.0.0/9,国内,no-resolve
+  - IP-CIDR,59.0.0.0/9,国内,no-resolve
+  - IP-CIDR,60.0.0.0/10,国内,no-resolve
+  - IP-CIDR,61.0.0.0/9,国内,no-resolve
+  - IP-CIDR,101.0.0.0/8,国内,no-resolve
+  - IP-CIDR,103.0.0.0/11,国内,no-resolve
+  - IP-CIDR,106.0.0.0/9,国内,no-resolve
+  - IP-CIDR,110.0.0.0/8,国内,no-resolve
+  - IP-CIDR,111.0.0.0/9,国内,no-resolve
+  - IP-CIDR,112.0.0.0/9,国内,no-resolve
+  - IP-CIDR,113.0.0.0/8,国内,no-resolve
+  - IP-CIDR,114.0.0.0/9,国内,no-resolve
+  - IP-CIDR,115.0.0.0/8,国内,no-resolve
+  - IP-CIDR,116.0.0.0/8,国内,no-resolve
+  - IP-CIDR,117.0.0.0/8,国内,no-resolve
+  - IP-CIDR,118.0.0.0/8,国内,no-resolve
+  - IP-CIDR,119.0.0.0/8,国内,no-resolve
+  - IP-CIDR,120.0.0.0/8,国内,no-resolve
+  - IP-CIDR,121.0.0.0/8,国内,no-resolve
+  - IP-CIDR,122.0.0.0/8,国内,no-resolve
+  - IP-CIDR,123.0.0.0/8,国内,no-resolve
+  - IP-CIDR,124.0.0.0/8,国内,no-resolve
+  - IP-CIDR,125.0.0.0/8,国内,no-resolve
+  - IP-CIDR,163.0.0.0/12,国内,no-resolve
+  - IP-CIDR,171.0.0.0/8,国内,no-resolve
+  - IP-CIDR,175.0.0.0/8,国内,no-resolve
+  - IP-CIDR,180.64.0.0/10,国内,no-resolve
+  - IP-CIDR,182.0.0.0/8,国内,no-resolve
+  - IP-CIDR,183.0.0.0/8,国内,no-resolve
+  - IP-CIDR,202.0.0.0/9,国内,no-resolve
+  - IP-CIDR,210.0.0.0/10,国内,no-resolve
+  - IP-CIDR,211.0.0.0/9,国内,no-resolve
+  - IP-CIDR,218.0.0.0/8,国内,no-resolve
+  - IP-CIDR,219.0.0.0/8,国内,no-resolve
+  - IP-CIDR,220.0.0.0/8,国内,no-resolve
+  - IP-CIDR,221.0.0.0/8,国内,no-resolve
+  - IP-CIDR,222.0.0.0/8,国内,no-resolve
+  - IP-CIDR,223.0.0.0/8,国内,no-resolve
   - GEOIP,CN,国内,no-resolve
   - MATCH,其他
 
@@ -801,7 +890,7 @@ rule-providers:
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   Discord / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/discord.mrs"}
   LinkedIn / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/linkedin.mrs"}
-  Zoom / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Zoom/Zoom.list"}
+  Zoom / Domain: {<<: *class, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/zoom.mrs"}
   Dropbox / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/dropbox.mrs"}
   Instagram / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/instagram.mrs"}
   PayPal / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/PayPal/PayPal.list"}
