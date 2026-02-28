@@ -33,9 +33,6 @@ proxy-providers:
       url: http://cp.cloudflare.com/generate_204
       interval: 300
       lazy: true
-    override:
-      udp: true
-      skip-cert-verify: false
 
   聚合:
     type: http
@@ -48,9 +45,6 @@ proxy-providers:
       url: http://cp.cloudflare.com/generate_204
       interval: 300
       lazy: true
-    override:
-      udp: true
-      skip-cert-verify: false
 
   火烧云:
     type: http
@@ -63,9 +57,6 @@ proxy-providers:
       url: http://cp.cloudflare.com/generate_204
       interval: 300
       lazy: true
-    override:
-      udp: true
-      skip-cert-verify: false
 
   多宝:
     type: http
@@ -78,9 +69,6 @@ proxy-providers:
       url: http://cp.cloudflare.com/generate_204
       interval: 300
       lazy: true
-    override:
-      udp: true
-      skip-cert-verify: false
 
 # ========================
 # 本地节点
@@ -152,10 +140,9 @@ proxies:
     udp: true
     network: tcp
     tls: true
-    servername: 108.66.217.25
     alpn: [h2, http/1.1]
     client-fingerprint: chrome
-    skip-cert-verify: true
+    skip-cert-verify: false
 
   - name: 国内落地-沪
     type: ss
@@ -169,20 +156,22 @@ proxies:
 # ========================
 # 全局设置
 # ========================
-port: 7890
-socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
 tproxy-port: 7895
 
 allow-lan: true
 mode: rule
-log-level: info
+log-level: warning
+unified-delay: true
+tcp-concurrent: true
+
+geodata-mode: true
 
 
-
+keep-alive-interval: 30
 external-controller: 0.0.0.0:9090
-secret: "123456"
+secret: "a123456"
 ipv6: false
 
 profile:
@@ -203,39 +192,15 @@ dns:
   listen: 0.0.0.0:7874
   ipv6: false
   enhanced-mode: fake-ip
-  fake-ip-range: 198.20.0.1/16
+  fake-ip-range: 198.18.0.1/16
 
-  # 引导DNS：解析DoH服务器地址用（纯UDP，不走规则）
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
 
   # 主DNS：国内DoH
   nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
+    - 223.5.5.5
+    - 119.29.29.29
 
 
-  # fallback触发条件
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    ipcidr:
-      - 240.0.0.0/4
-      - 0.0.0.0/32
-    domain:
-      - +.google.com
-      - +.facebook.com
-      - +.youtube.com
-      - +.twitter.com
-      - +.github.com
-      - +.telegram.org
-      - +.openai.com
-
-  # 代理节点域名解析
-  proxy-server-nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
 
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
@@ -288,38 +253,12 @@ dns:
 tun:
   enable: true
   stack: gvisor
-  endpoint-independent-nat: true
+  endpoint-independent-nat: false
   auto-route: false
   auto-detect-interface: false
   auto-redirect: false
   strict-route: false
 
-# ========================
-# 域名嗅探
-# ========================
-sniffer:
-  enable: true
-  sniff:
-    TLS:
-      ports: [443, 8443]
-    HTTP:
-      ports: [80, 8080]
-  skip-domain:
-    - +.push.apple.com
-    - +.apple.com
-    - +.icloud.com
-    - +.baidu.com
-    - +.taobao.com
-    - +.tmall.com
-    - +.jd.com
-    - +.qq.com
-    - +.weixin.com
-    - +.wechat.com
-    - +.163.com
-    - +.126.com
-    - +.bilibili.com
-    - +.youku.com
-    - +.iqiyi.com
 
 # ========================
 # 策略组
