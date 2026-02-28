@@ -1,6 +1,6 @@
 # ================================================================
 # Clash-ALL 运营级完整版 v3.0
-# 更新时间: 2026-02
+# 更新时间: 2026-02-28
 # ================================================================
 # 规则集优化清单：
 #   ✅ 全部规则集补全 path（本地缓存，重启/离线可用）
@@ -181,14 +181,9 @@ tcp-concurrent: true
 
 geodata-mode: true
 
-geox-url:
-  geoip: "https://gh-proxy.com/github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
-  geosite: "https://gh-proxy.com/github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
-  mmdb: "https://gh-proxy.com/github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb"
-  asn: "https://gh-proxy.com/github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
 
 keep-alive-interval: 30
-external-controller: 127.0.0.1:9090
+external-controller: 0.0.0.0:9090
 secret: "a123456"
 ipv6: false
 
@@ -222,11 +217,6 @@ dns:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
 
-  # 境外DNS：非CN域名走此组，DoH请求本身经Clash规则走代理
-  fallback:
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
-    - https://1.0.0.1/dns-query
 
   # fallback触发条件
   fallback-filter:
@@ -298,7 +288,7 @@ dns:
 # TUN（保持关闭）
 # ========================
 tun:
-  enable: false
+  enable: true
   stack: gvisor
   endpoint-independent-nat: false
   auto-route: false
