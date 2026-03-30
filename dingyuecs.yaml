@@ -22,7 +22,7 @@ proxy-providers:
     health-check:
       enable: true
       url: http://cp.cloudflare.com/generate_204
-      interval: 300
+      interval: 300å
       lazy: true
     override:
       udp: true
@@ -154,9 +154,23 @@ dns:
   default-nameserver:
   - 223.5.5.5
   - 119.29.29.29
+  nameserver-policy:
+    'geosite:private': REPLACE_ME_PRIVATE_DNS_IP
+    +.lan: REPLACE_ME_PRIVATE_DNS_IP
+    +.local: REPLACE_ME_PRIVATE_DNS_IP
+    'geosite:cn':
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
   nameserver:
   - https://doh.pub/dns-query
   - https://dns.alidns.com/dns-query
+  fallback:
+  - tls://1.1.1.1
+  - tls://8.8.4.4
+  direct-nameserver:
+  - https://doh.pub/dns-query
+  - https://dns.alidns.com/dns-query
+  direct-nameserver-follow-policy: true
   fallback-filter:
     geoip: true
     geoip-code: CN
@@ -178,7 +192,6 @@ dns:
   fake-ip-filter:
   - +.lan
   - +.local
-  - geosite:cn
   - geosite:private
   - time.windows.com
   - +.ntp.org
@@ -193,31 +206,9 @@ dns:
   - dns.msftncsi.com
   - detectportal.firefox.com
   - localhost.ptlogin2.qq.com
-  - +.km688.ink
-  - +.onesubv.site
-  - +.oneyyds.online
-  - +.fengyyds.site
-  - +.onemg.top
-  - +.chybinc.com
-  - +.invitevp.com
-  - +.vp2.us
-  - +.xiaoniuyun.cc
-  - +.apple-bing.sbs
-  - +.bncrcloud.com
-  - +.xby01.xyz
-  - +.idsduf.com
-  - +.66jc.top
-  - +.gfw.gg
-  - +.moedog.cloud
-  - +.ynhtbank.com
-  - +.qeayr.cn
-  - +.saojc.xyz
-  - +.sssyun.xyz
-  - +.dler.cloud
-  - +.0tk8a3a1q4t94dler.com
-  - +.aerianas.top
-  - +.gptacg.top
-  - +.wxda.net
+  # 如有 NAS / 打印机 / 本地域名，再按实际环境补充
+  # - nas.lan
+  # - printer.local
 tun:
   enable: true
   stack: gvisor
@@ -254,6 +245,90 @@ sniffer:
   - +.youku.com
   - +.iqiyi.com
 proxy-groups:
+# =========================
+# 核心业务组
+# =========================
+- name: 国外
+  type: select
+  proxies:
+  - 故障转移
+  - 香港服务器直连
+  - 香港-搬瓦工-美国家宽
+  - 香港中转美国家宽
+  - 所有-自动
+  - 所有-手动
+  - 加拿大-美国家宽
+  - 美国家宽直连
+  - 香港-故转
+  - 台湾-故转
+  - 日本-故转
+  - 韩国-故转
+  - 新加坡-故转
+  - 美国-故转
+  - 英国-故转
+  - 其他地区-故转
+  - DIRECT
+  - REJECT
+- name: 国内
+  type: select
+  proxies:
+  - DIRECT
+  - 国内落地-沪
+  - 香港服务器直连
+  - 香港-搬瓦工-美国家宽
+  - 加拿大-美国家宽
+  - 香港-故转
+  - 台湾-故转
+  - 日本-故转
+  - 韩国-故转
+  - 新加坡-故转
+  - 美国-故转
+  - 其他地区-故转
+  - 故障转移
+  - 所有-自动
+  - 所有-手动
+  - 美国家宽直连
+  - REJECT
+- name: Google
+  type: select
+  proxies:
+  - 香港服务器直连
+  - 香港中转美国家宽
+  - 香港-搬瓦工-美国家宽
+  - 香港-故转
+  - 新加坡-故转
+  - 日本-故转
+  - 台湾-故转
+  - 韩国-故转
+  - 美国-故转
+  - 加拿大-美国家宽
+  - 其他地区-故转
+  - 故障转移
+  - 所有-自动
+  - 所有-手动
+  - 美国家宽直连
+  - DIRECT
+  - REJECT
+- name: Crypto
+  type: select
+  proxies:
+  - 台湾-故转
+  - 香港服务器直连
+  - 香港中转美国家宽
+  - 香港-搬瓦工-美国家宽
+  - 加拿大-美国家宽
+  - 美国家宽直连
+  - 美国-故转
+  - 香港-故转
+  - 新加坡-故转
+  - 日本-故转
+  - 韩国-故转
+  - 其他地区-故转
+  - 故障转移
+  - 所有-手动
+  - 所有-自动
+  - DIRECT
+  - REJECT
 - name: ChatGPT
   type: fallback
   proxies:
@@ -370,7 +445,7 @@ proxy-groups:
   - 韩国-故转
   - 美国-故转
   - 加拿大-美国家宽
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
@@ -390,7 +465,7 @@ proxy-groups:
   - 韩国-故转
   - 美国-故转
   - 加拿大-美国家宽
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
@@ -409,7 +484,7 @@ proxy-groups:
   - 韩国-故转
   - 美国-故转
   - 加拿大-美国家宽
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
@@ -430,7 +505,7 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
@@ -449,7 +524,7 @@ proxy-groups:
   - 韩国-故转
   - 美国-故转
   - 加拿大-美国家宽
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
@@ -468,7 +543,7 @@ proxy-groups:
   - 韩国-故转
   - 美国-故转
   - 加拿大-美国家宽
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
@@ -488,7 +563,7 @@ proxy-groups:
   - 韩国-故转
   - 美国-故转
   - 加拿大-美国家宽
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
@@ -507,7 +582,7 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
@@ -527,7 +602,7 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
@@ -547,7 +622,7 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
@@ -567,7 +642,7 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
@@ -587,7 +662,7 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
@@ -607,7 +682,7 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
@@ -627,7 +702,7 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
@@ -654,44 +729,6 @@ proxy-groups:
   - 加拿大-美国家宽
   - 美国家宽直连
   - REJECT
-- name: T-mobile
-  type: select
-  proxies:
-  - 香港-搬瓦工-美国家宽
-  - 香港中转美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
-  - 美国-故转
-  - 日本-故转
-  - 新加坡-故转
-  - 韩国-故转
-  - 香港-故转
-  - 台湾-故转
-  - 其他-故转
-  - 故障转移
-  - 所有-自动
-  - 所有-手动
-  - REJECT
-- name: BiliBili
-  type: select
-  proxies:
-  - DIRECT
-  - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
-  - 国内落地-沪
-  - 加拿大-美国家宽
-  - 香港-故转
-  - 台湾-故转
-  - 日本-故转
-  - 韩国-故转
-  - 新加坡-故转
-  - 美国-故转
-  - 其他-故转
-  - 故障转移
-  - 所有-自动
-  - 所有-手动
-  - 美国家宽直连
-  - REJECT
 - name: Steam
   type: select
   proxies:
@@ -708,7 +745,7 @@ proxy-groups:
   - 加拿大-美国家宽
   - 美国家宽直连
   - 英国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
@@ -729,7 +766,7 @@ proxy-groups:
   - 加拿大-美国家宽
   - 美国家宽直连
   - 英国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
@@ -749,29 +786,9 @@ proxy-groups:
   - 美国-故转
   - 台湾-故转
   - 韩国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 美国家宽直连
-  - REJECT
-- name: Google
-  type: select
-  proxies:
-  - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
-  - 香港-故转
-  - 新加坡-故转
-  - 日本-故转
-  - 台湾-故转
-  - 韩国-故转
-  - 美国-故转
-  - 加拿大-美国家宽
-  - 其他-故转
-  - 故障转移
-  - 所有-自动
-  - 所有-手动
-  - 美国家宽直连
-  - DIRECT
   - REJECT
 - name: Microsoft
   type: select
@@ -788,7 +805,7 @@ proxy-groups:
   - 美国-故转
   - 台湾-故转
   - 韩国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 美国家宽直连
   - REJECT
@@ -807,60 +824,19 @@ proxy-groups:
   - 加拿大-美国家宽
   - 美国家宽直连
   - 英国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
   - DIRECT
   - REJECT
-- name: Crypto
+- name: BiliBili
   type: select
   proxies:
-  - 台湾-故转
-  - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
-  - 美国-故转
-  - 香港-故转
-  - 新加坡-故转
-  - 日本-故转
-  - 韩国-故转
-  - 其他-故转
-  - 故障转移
-  - 所有-手动
-  - 所有-自动
   - DIRECT
-  - REJECT
-- name: 国外
-  type: select
-  proxies:
-  - 故障转移
   - 香港服务器直连
   - 香港-搬瓦工-美国家宽
-  - 香港中转美国家宽
-  - 所有-自动
-  - 所有-手动
-  - 加拿大-美国家宽
-  - 美国家宽直连
-  - 香港-故转
-  - 台湾-故转
-  - 日本-故转
-  - 韩国-故转
-  - 新加坡-故转
-  - 美国-故转
-  - 英国-故转
-  - 其他-故转
-  - DIRECT
-  - REJECT
-- name: 国内
-  type: select
-  proxies:
-  - DIRECT
   - 国内落地-沪
-  - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
   - 加拿大-美国家宽
   - 香港-故转
   - 台湾-故转
@@ -868,11 +844,29 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
   - 美国家宽直连
+  - REJECT
+- name: T-mobile
+  type: select
+  proxies:
+  - 香港-搬瓦工-美国家宽
+  - 香港中转美国家宽
+  - 加拿大-美国家宽
+  - 美国家宽直连
+  - 美国-故转
+  - 日本-故转
+  - 新加坡-故转
+  - 韩国-故转
+  - 香港-故转
+  - 台湾-故转
+  - 其他地区-故转
+  - 故障转移
+  - 所有-自动
+  - 所有-手动
   - REJECT
 - name: 其他
   type: select
@@ -892,40 +886,187 @@ proxy-groups:
   - 新加坡-故转
   - 美国-故转
   - 英国-故转
-  - 其他-故转
+  - 其他地区-故转
   - REJECT
-- name: Test
+
+# =========================
+# 地区快捷入口
+# =========================
+- name: 香港
   type: select
-  proxies:
-  - DIRECT
-  - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
-  - 所有-自动
-  - 所有-手动
-  - 加拿大-美国家宽
-  - 美国家宽直连
-  - 香港-故转
-  - 台湾-故转
-  - 日本-故转
-  - 韩国-故转
-  - 新加坡-故转
-  - 美国-故转
-  - 英国-故转
-  - 其他-故转
-  - 故障转移
-  - REJECT
-- name: Block
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广港|香港|HK|Hong\s*Kong|HongKong|🇭🇰)
+- name: 台湾
   type: select
-  proxies:
-  - REJECT
-  - DIRECT
-  - 所有-自动
-  - 所有-手动
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广台|台湾|台灣|TW|Tai\s*wan|TaiWan|🇹🇼)
+- name: 日本
+  type: select
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广日|日本|JP|Tokyo|Osaka|东京|大阪|埼玉|🇯🇵|Japan)
+- name: 韩国
+  type: select
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广韩|韩国|韓國|KR|Seoul|首尔|🇰🇷|Korea)
+- name: 新加坡
+  type: select
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广新|新加坡|SG|Singapore|狮城|坡|🇸🇬)
+- name: 美国
+  type: select
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广美|美国|US|United\s*States|Los\s*Angeles|San\s*Jose|Dallas|New\s*York|洛杉|圣何塞|达拉斯|纽约|🇺🇸)
+- name: 英国
+  type: select
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(英国|UK|United\s*Kingdom|London|伦敦|🇬🇧)
+- name: 其他地区
+  type: select
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)^(?!.*(香港|HK|Hong|台湾|TW|Taiwan|日本|JP|Japan|东京|大阪|韩国|KR|Korea|新加坡|SG|Singapore|美国|US|United
+    States|英国|UK|United Kingdom)).*
+
+# =========================
+# 地区自动组
+# =========================
+- name: 香港-自动
+  type: url-test
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广港|香港|HK|Hong\s*Kong|HongKong|🇭🇰)
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  tolerance: 100
+  lazy: true
+- name: 台湾-自动
+  type: url-test
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广台|台湾|台灣|TW|Tai\s*wan|TaiWan|🇹🇼)
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  tolerance: 100
+  lazy: true
+- name: 日本-自动
+  type: url-test
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广日|日本|JP|Tokyo|Osaka|东京|大阪|埼玉|🇯🇵|Japan)
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  tolerance: 100
+  lazy: true
+- name: 韩国-自动
+  type: url-test
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广韩|韩国|韓國|KR|Seoul|首尔|🇰🇷|Korea)
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  tolerance: 100
+  lazy: true
+- name: 新加坡-自动
+  type: url-test
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广新|新加坡|SG|Singapore|狮城|坡|🇸🇬)
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  tolerance: 100
+  lazy: true
+- name: 美国-自动
+  type: url-test
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(广美|美国|US|United\s*States|Los\s*Angeles|San\s*Jose|Dallas|New\s*York|洛杉|圣何塞|达拉斯|纽约|🇺🇸)
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  tolerance: 100
+  lazy: true
+- name: 英国-自动
+  type: url-test
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)(英国|UK|United\s*Kingdom|London|伦敦|🇬🇧)
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  tolerance: 100
+  lazy: true
+- name: 其他地区-自动
+  type: url-test
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+  filter: (?i)^(?!.*(香港|HK|Hong|台湾|TW|Taiwan|日本|JP|Japan|东京|大阪|韩国|KR|Korea|新加坡|SG|Singapore|美国|US|United
+    States|英国|UK|United Kingdom)).*
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  tolerance: 150
+  lazy: true
+
+# =========================
+# 地区故障转移组
+# =========================
 - name: 香港-故转
   type: fallback
   proxies:
   - 香港服务器直连
-  - 香港-手动
+  - 香港
   - 香港-自动
   url: http://cp.cloudflare.com/generate_204
   interval: 300
@@ -934,7 +1075,7 @@ proxy-groups:
 - name: 台湾-故转
   type: fallback
   proxies:
-  - 台湾-手动
+  - 台湾
   - 台湾-自动
   - 香港-故转
   - 所有-自动
@@ -945,7 +1086,7 @@ proxy-groups:
 - name: 日本-故转
   type: fallback
   proxies:
-  - 日本-手动
+  - 日本
   - 日本-自动
   - 香港-故转
   - 所有-自动
@@ -956,7 +1097,7 @@ proxy-groups:
 - name: 韩国-故转
   type: fallback
   proxies:
-  - 韩国-手动
+  - 韩国
   - 韩国-自动
   - 香港-故转
   - 所有-自动
@@ -967,7 +1108,7 @@ proxy-groups:
 - name: 新加坡-故转
   type: fallback
   proxies:
-  - 新加坡-手动
+  - 新加坡
   - 新加坡-自动
   - 香港-故转
   - 所有-自动
@@ -978,7 +1119,7 @@ proxy-groups:
 - name: 美国-故转
   type: fallback
   proxies:
-  - 美国-手动
+  - 美国
   - 美国-自动
   - 香港-故转
   - 所有-自动
@@ -989,7 +1130,7 @@ proxy-groups:
 - name: 英国-故转
   type: fallback
   proxies:
-  - 英国-手动
+  - 英国
   - 英国-自动
   - 香港-故转
   - 所有-自动
@@ -997,11 +1138,11 @@ proxy-groups:
   interval: 300
   lazy: false
   max-failed-attempts: 3
-- name: 其他-故转
+- name: 其他地区-故转
   type: fallback
   proxies:
-  - 其他-手动
-  - 其他-自动
+  - 其他地区
+  - 其他地区-自动
   - 香港-故转
   - 所有-自动
   url: http://cp.cloudflare.com/generate_204
@@ -1021,181 +1162,16 @@ proxy-groups:
   - 韩国-故转
   - 新加坡-故转
   - 美国-故转
-  - 其他-故转
+  - 其他地区-故转
   - 所有-自动
   url: http://cp.cloudflare.com/generate_204
   interval: 300
   lazy: false
   max-failed-attempts: 3
-- name: 香港-手动
-  type: select
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广港|香港|HK|Hong\s*Kong|HongKong|🇭🇰)
-- name: 香港-自动
-  type: url-test
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广港|香港|HK|Hong\s*Kong|HongKong|🇭🇰)
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-  tolerance: 100
-  lazy: true
-- name: 台湾-手动
-  type: select
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广台|台湾|台灣|TW|Tai\s*wan|TaiWan|🇹🇼)
-- name: 台湾-自动
-  type: url-test
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广台|台湾|台灣|TW|Tai\s*wan|TaiWan|🇹🇼)
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-  tolerance: 100
-  lazy: true
-- name: 日本-手动
-  type: select
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广日|日本|JP|Tokyo|Osaka|东京|大阪|埼玉|🇯🇵|Japan)
-- name: 日本-自动
-  type: url-test
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广日|日本|JP|Tokyo|Osaka|东京|大阪|埼玉|🇯🇵|Japan)
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-  tolerance: 100
-  lazy: true
-- name: 韩国-手动
-  type: select
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广韩|韩国|韓國|KR|Seoul|首尔|🇰🇷|Korea)
-- name: 韩国-自动
-  type: url-test
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广韩|韩国|韓國|KR|Seoul|首尔|🇰🇷|Korea)
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-  tolerance: 100
-  lazy: true
-- name: 新加坡-手动
-  type: select
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广新|新加坡|SG|Singapore|狮城|坡|🇸🇬)
-- name: 新加坡-自动
-  type: url-test
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广新|新加坡|SG|Singapore|狮城|坡|🇸🇬)
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-  tolerance: 100
-  lazy: true
-- name: 美国-手动
-  type: select
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广美|美国|US|United\s*States|Los\s*Angeles|San\s*Jose|Dallas|New\s*York|洛杉|圣何塞|达拉斯|纽约|🇺🇸)
-- name: 美国-自动
-  type: url-test
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(广美|美国|US|United\s*States|Los\s*Angeles|San\s*Jose|Dallas|New\s*York|洛杉|圣何塞|达拉斯|纽约|🇺🇸)
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-  tolerance: 100
-  lazy: true
-- name: 英国-手动
-  type: select
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(英国|UK|United\s*Kingdom|London|伦敦|🇬🇧)
-- name: 英国-自动
-  type: url-test
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)(英国|UK|United\s*Kingdom|London|伦敦|🇬🇧)
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-  tolerance: 100
-  lazy: true
-- name: 其他-手动
-  type: select
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)^(?!.*(香港|HK|Hong|台湾|TW|Taiwan|日本|JP|Japan|东京|大阪|韩国|KR|Korea|新加坡|SG|Singapore|美国|US|United
-    States|英国|UK|United Kingdom)).*
-- name: 其他-自动
-  type: url-test
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
-  filter: (?i)^(?!.*(香港|HK|Hong|台湾|TW|Taiwan|日本|JP|Japan|东京|大阪|韩国|KR|Korea|新加坡|SG|Singapore|美国|US|United
-    States|英国|UK|United Kingdom)).*
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-  tolerance: 150
-  lazy: true
-- name: 所有-手动
-  type: select
-  use:
-  - 红杏云
-  - 聚合
-  - 火烧云
-  - 多宝
+
+# =========================
+# 调试与底层组
+# =========================
 - name: 所有-自动
   type: url-test
   use:
@@ -1207,6 +1183,40 @@ proxy-groups:
   interval: 300
   tolerance: 100
   lazy: true
+- name: 所有-手动
+  type: select
+  use:
+  - 红杏云
+  - 聚合
+  - 火烧云
+  - 多宝
+- name: 调试
+  type: select
+  proxies:
+  - DIRECT
+  - 香港服务器直连
+  - 香港-搬瓦工-美国家宽
+  - 所有-自动
+  - 所有-手动
+  - 加拿大-美国家宽
+  - 美国家宽直连
+  - 香港-故转
+  - 台湾-故转
+  - 日本-故转
+  - 韩国-故转
+  - 新加坡-故转
+  - 美国-故转
+  - 英国-故转
+  - 其他地区-故转
+  - 故障转移
+  - REJECT
+- name: Block
+  type: select
+  proxies:
+  - REJECT
+  - DIRECT
+  - 所有-自动
+  - 所有-手动
 rules:
 - DOMAIN-SUFFIX,localhost,DIRECT
 - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
@@ -1296,7 +1306,7 @@ rules:
 - RULE-SET,China / Domain,国内
 - RULE-SET,China / IP,国内,no-resolve
 - RULE-SET,Private / Domain,国内
-- RULE-SET,TEST / Domain,Test
+- RULE-SET,TEST / Domain,调试
 - IP-CIDR,1.0.1.0/24,国内,no-resolve
 - IP-CIDR,1.0.2.0/23,国内,no-resolve
 - IP-CIDR,1.0.8.0/21,国内,no-resolve
