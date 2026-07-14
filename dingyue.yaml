@@ -1,21 +1,6 @@
-proxy-providers:
-  红杏云:
+聚合:
     type: http
-    url: https://bwg.yixiu.edu.kg/Woaini.123/download/collection/zixiju
-    interval: 21600
-    path: ./providers/hx.yaml
-    exclude-filter: (?i)剩余|到期|官网|套餐|流量|时间|应急|测试|过期|重置
-    health-check:
-      enable: true
-      url: http://cp.cloudflare.com/generate_204
-      interval: 300
-      lazy: true
-    override:
-      udp: true
-      skip-cert-verify: false
-  聚合:
-    type: http
-    url: https://bwg.yixiu.edu.kg/Woaini.123/download/collection/zixiju
+    url: http://176.122.170.61:3001/woaini.123/download/collection/zixiju
     interval: 21600
     path: ./providers/zixiju.yaml
     exclude-filter: (?i)剩余|到期|官网|套餐|流量|时间|应急|测试|过期|重置
@@ -27,48 +12,7 @@ proxy-providers:
     override:
       udp: true
       skip-cert-verify: false
-  火烧云:
-    type: http
-    url: https://bwg.yixiu.edu.kg/Woaini.123/download/collection/zixiju
-    interval: 21600
-    path: ./providers/hsc.yaml
-    exclude-filter: (?i)剩余|到期|官网|套餐|流量|时间|应急|测试|过期|重置
-    health-check:
-      enable: true
-      url: http://cp.cloudflare.com/generate_204
-      interval: 300
-      lazy: true
-    override:
-      udp: true
-      skip-cert-verify: false
-  多宝:
-    type: http
-    url: https://dbsub2.whtjdasha.com/s/23c2b1ab4ac006b639e82b9384558daf
-    interval: 21600
-    path: ./providers/db.yaml
-    exclude-filter: (?i)剩余|到期|官网|套餐|流量|时间|应急|测试|过期|重置
-    health-check:
-      enable: true
-      url: http://cp.cloudflare.com/generate_204
-      interval: 300
-      lazy: true
-    override:
-      udp: true
-      skip-cert-verify: false
 proxies:
-- name: 香港-搬瓦工-美国家宽
-  type: vless
-  server: 47.86.249.58
-  port: 15599
-  uuid: bb43a759-26fa-4756-b14f-5b02357cdbd6
-  network: tcp
-  tls: true
-  udp: true
-  servername: aws.amazon.com
-  reality-opts:
-    public-key: 1T28q5AbvK4gbGLwxftSv0SmjznZq-mmBDEZneZ1t18
-    short-id: 57eeaecbeeaa8a64
-  client-fingerprint: chrome
 - name: 香港服务器直连
   type: vless
   server: 47.86.249.58
@@ -95,33 +39,22 @@ proxies:
     public-key: aL7Vt6HW2dCxfAK5IRrOJGA8_tShzonY-e8Iqe1yAQE
     short-id: 294c33ba34
   client-fingerprint: chrome
-- name: 加拿大-美国家宽
+- name: 美国直连
   type: vless
-  server: 65.49.233.36
-  port: 37798
-  uuid: c1103ef6-325c-4579-ab3a-fdb783090342
+  server: 176.122.170.61
+  port: 18670
+  uuid: b7acaa0f-de11-4a44-a03e-6c3e576d6b23
+  udp: true
   network: tcp
   tls: true
-  udp: true
-  servername: www.microsoft.com
+  flow: xtls-rprx-vision
+  servername: www.cloudflare.com
+  client-fingerprint: chrome
+  skip-cert-verify: false
   reality-opts:
-    public-key: 9pd7wQWzqGwICNbBEKo-2txS4bxlcaapBLKSfjnbCFg
-    short-id: a6ba9336f3ff8b15
-  client-fingerprint: chrome
-- name: 美国家宽直连
-  type: vless
-  server: 108.66.217.25
-  port: 24157
-  uuid: 92eb07c6-f3ce-4e3d-82bb-59262146fcb8
-  udp: true
-  network: tcp
-  tls: true
-  servername: 108.66.217.25
-  alpn:
-  - h2
-  - http/1.1
-  client-fingerprint: chrome
-  skip-cert-verify: true
+    public-key: _PSy4hdsfe8T3KhqoEwQraLGFsAHqTRi4mmx-CpI1VY
+    short-id: 3fabeb43185cff26
+    spider-x: /747d0370190b22b
 - name: 国内落地-沪
   type: ss
   server: 118.31.79.16
@@ -155,9 +88,12 @@ dns:
   - 223.5.5.5
   - 119.29.29.29
   nameserver-policy:
-    'geosite:private': REPLACE_ME_PRIVATE_DNS_IP
-    +.lan: REPLACE_ME_PRIVATE_DNS_IP
-    +.local: REPLACE_ME_PRIVATE_DNS_IP
+    'geosite:private':
+    - REPLACE_ME_PRIVATE_DNS_IP
+    '+.lan':
+    - REPLACE_ME_PRIVATE_DNS_IP
+    '+.local':
+    - REPLACE_ME_PRIVATE_DNS_IP
     'geosite:cn':
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
@@ -253,12 +189,9 @@ proxy-groups:
   proxies:
   - 故障转移
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
-  - 香港中转美国家宽
   - 所有-自动
   - 所有-手动
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -275,8 +208,6 @@ proxy-groups:
   - DIRECT
   - 国内落地-沪
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -287,26 +218,23 @@ proxy-groups:
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - REJECT
 - name: Google
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
   - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Crypto
@@ -314,10 +242,7 @@ proxy-groups:
   proxies:
   - 台湾-故转
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 美国-故转
   - 香港-故转
   - 新加坡-故转
@@ -332,10 +257,7 @@ proxy-groups:
 - name: ChatGPT
   type: fallback
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 香港中转美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 美国-故转
   - REJECT
   url: http://cp.cloudflare.com/generate_204
@@ -345,10 +267,7 @@ proxy-groups:
 - name: Claude
   type: fallback
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 香港中转美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 美国-故转
   - REJECT
   url: http://cp.cloudflare.com/generate_204
@@ -358,10 +277,7 @@ proxy-groups:
 - name: Gemini
   type: fallback
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 香港中转美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 美国-故转
   - REJECT
   url: http://cp.cloudflare.com/generate_204
@@ -371,10 +287,7 @@ proxy-groups:
 - name: Copilot
   type: fallback
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 香港中转美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 美国-故转
   - REJECT
   url: http://cp.cloudflare.com/generate_204
@@ -384,10 +297,7 @@ proxy-groups:
 - name: Perplexity
   type: fallback
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 香港中转美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 美国-故转
   - REJECT
   url: http://cp.cloudflare.com/generate_204
@@ -397,10 +307,7 @@ proxy-groups:
 - name: Meta AI
   type: fallback
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 香港中转美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 美国-故转
   - REJECT
   url: http://cp.cloudflare.com/generate_204
@@ -410,10 +317,8 @@ proxy-groups:
 - name: Grok
   type: fallback
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
-  - 香港中转美国家宽
+  - 美国直连
+
   - 美国-故转
   - REJECT
   url: http://cp.cloudflare.com/generate_204
@@ -423,10 +328,7 @@ proxy-groups:
 - name: Groq
   type: fallback
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
-  - 香港中转美国家宽
+  - 美国直连
   - 美国-故转
   - REJECT
   url: http://cp.cloudflare.com/generate_204
@@ -437,39 +339,34 @@ proxy-groups:
   type: select
   proxies:
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
   - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: WhatsApp
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
   - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Line
@@ -477,28 +374,23 @@ proxy-groups:
   proxies:
   - 日本-故转
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
   - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Twitter
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -515,67 +407,57 @@ proxy-groups:
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
   - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Reddit
   type: select
   proxies:
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
   - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: GitHub
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
   - 其他地区-故转
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: YouTube
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -583,19 +465,16 @@ proxy-groups:
   - 新加坡-故转
   - 美国-故转
   - 其他地区-故转
-  - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Netflix
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -603,19 +482,16 @@ proxy-groups:
   - 新加坡-故转
   - 美国-故转
   - 其他地区-故转
-  - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Disney
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -623,19 +499,16 @@ proxy-groups:
   - 新加坡-故转
   - 美国-故转
   - 其他地区-故转
-  - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: HBO
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -643,19 +516,16 @@ proxy-groups:
   - 新加坡-故转
   - 美国-故转
   - 其他地区-故转
-  - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Spotify
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -663,19 +533,16 @@ proxy-groups:
   - 新加坡-故转
   - 美国-故转
   - 其他地区-故转
-  - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Crunchyroll
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -683,19 +550,16 @@ proxy-groups:
   - 新加坡-故转
   - 美国-故转
   - 其他地区-故转
-  - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Twitch
   type: select
   proxies:
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -703,47 +567,37 @@ proxy-groups:
   - 新加坡-故转
   - 美国-故转
   - 其他地区-故转
-  - 加拿大-美国家宽
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - DIRECT
   - REJECT
 - name: Hulu
   type: select
   proxies:
   - 美国-故转
-  - 香港-搬瓦工-美国家宽
-  - 香港中转美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 所有-自动
   - 所有-手动
   - REJECT
 - name: TikTok-专用
   type: select
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 香港中转美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - REJECT
 - name: Steam
   type: select
   proxies:
   - DIRECT
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 英国-故转
   - 其他地区-故转
   - 故障转移
@@ -755,16 +609,13 @@ proxy-groups:
   proxies:
   - DIRECT
   - 香港服务器直连
-  - 香港中转美国家宽
-  - 香港-搬瓦工-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 英国-故转
   - 其他地区-故转
   - 故障转移
@@ -776,10 +627,8 @@ proxy-groups:
   proxies:
   - DIRECT
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
   - 所有-自动
   - 所有-手动
-  - 加拿大-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
@@ -788,17 +637,15 @@ proxy-groups:
   - 韩国-故转
   - 其他地区-故转
   - 故障转移
-  - 美国家宽直连
+  - 美国直连
   - REJECT
 - name: Microsoft
   type: select
   proxies:
   - DIRECT
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
   - 所有-自动
   - 所有-手动
-  - 加拿大-美国家宽
   - 香港-故转
   - 新加坡-故转
   - 日本-故转
@@ -807,13 +654,11 @@ proxy-groups:
   - 韩国-故转
   - 其他地区-故转
   - 故障转移
-  - 美国家宽直连
+  - 美国直连
   - REJECT
 - name: Amazon
   type: select
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 香港中转美国家宽
   - 香港服务器直连
   - 香港-故转
   - 新加坡-故转
@@ -821,8 +666,7 @@ proxy-groups:
   - 台湾-故转
   - 韩国-故转
   - 美国-故转
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 英国-故转
   - 其他地区-故转
   - 故障转移
@@ -835,9 +679,7 @@ proxy-groups:
   proxies:
   - DIRECT
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
   - 国内落地-沪
-  - 加拿大-美国家宽
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -848,15 +690,12 @@ proxy-groups:
   - 故障转移
   - 所有-自动
   - 所有-手动
-  - 美国家宽直连
+  - 美国直连
   - REJECT
 - name: T-mobile
   type: select
   proxies:
-  - 香港-搬瓦工-美国家宽
-  - 香港中转美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 美国-故转
   - 日本-故转
   - 新加坡-故转
@@ -874,11 +713,9 @@ proxy-groups:
   - 故障转移
   - DIRECT
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
   - 所有-自动
   - 所有-手动
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -1153,9 +990,7 @@ proxy-groups:
   type: fallback
   proxies:
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 香港-故转
   - 台湾-故转
   - 日本-故转
@@ -1195,11 +1030,9 @@ proxy-groups:
   proxies:
   - DIRECT
   - 香港服务器直连
-  - 香港-搬瓦工-美国家宽
   - 所有-自动
   - 所有-手动
-  - 加拿大-美国家宽
-  - 美国家宽直连
+  - 美国直连
   - 香港-故转
   - 台湾-故转
   - 日本-故转
